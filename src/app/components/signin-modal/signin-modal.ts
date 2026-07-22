@@ -30,7 +30,8 @@ export class SigninModal {
   onSignIn() {
     // Test fields
     const strongPasswordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
     this.errorMessage = null;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -58,13 +59,12 @@ export class SigninModal {
 
     this.authService.register(this.registerData).subscribe({
       next: (response) => {
-        console.log('Inscription success !', response);
         this.dialogRef.close(response);
       },
-      error: (err) => {
-        console.error(err);
+      error: (errorResponse) => {
+        console.log(errorResponse.error);
         this.errorMessage =
-          err.error?.message || 'An error occurred during sign up.';
+          errorResponse.error.error || 'An error occurred during sign up.';
       },
     });
   }
