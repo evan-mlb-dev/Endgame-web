@@ -1,1 +1,152 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
+:root {
+  /* Main colors */
+  --primary-color: #b24c63;
+  --secondary-color: #00df9a;
+  --ternary-color: #353164;
+  --bg-dark: #0b0e14;
+  --card-bg: #34344a;
+
+  /* Text */
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: "Rajdhani", sans-serif !important;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: var(--primary-color);
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  color: var(--primary-color);
+}
+
+h3 {
+  font-weight: 200;
+  font-size: 30px;
+  letter-spacing: 1px;
+  color: var(--secondary-color);
+}
+
+a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  color: transparent;
+  background: linear-gradient(
+      to right,
+      var(--secondary-color) 50%,
+      var(--text-muted) 50%
+    )
+    100% 0 / 200% 100%;
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: background-position 0.15s ease-out;
+
+  &.active {
+    color: var(--secondary-color);
+    position: relative;
+    border-bottom: none;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid var(--secondary-color);
+    }
+  }
+
+  &:hover {
+    background-position: 0 0;
+  }
+}
+
+.material-symbols-outlined {
+  font-size: 30px;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 30;
+  transition: font-variation-settings 0.3s ease;
+  display: inline-block;
+}
+
+//// modals
+
+.mdc-dialog__surface {
+  border-radius: 14px !important;
+}
+
+.modal-container {
+  padding: 10px;
+  width: 350px;
+  background-color: var;
+}
+
+.modal-title {
+  margin-left: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+mat-dialog-actions {
+  padding-top: 10px;
+}
+
+.primary-btn {
+  margin-left: 5px;
+  background: var(--primary-color);
+  color: var(--text-main);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  background: var(--secondary-color);
+  color: var(--text-main);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+//// inputs
+input.ng-invalid.ng-touched {
+  border-color: #9b1c1c; /* Ton rouge d'erreur */
+  background-color: #fff6f6; /* Un fond très légèrement teinté */
+}

@@ -1,0 +1,47 @@
+.dashboard {
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+
+  background-color: var();
+  margin: 50px;
+  border-radius: 10px;
+
+
+
+}
+
+.dashboard-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+
+  .material-symbols-outlined{
+    font-size: 40px;
+  }
+
+
+  &.plantoplay {
+    color: var(--ternary-color);
+  }
+
+  &.playing {
+    color: var(--primary-color);
+  }
+
+  &.completed {
+    color: var(--secondary-color);
+  }
+}
+
+.dashboard-item-text {
+  font-size: 22px;
+
+  justify-content: center;
+}
+
+.dashboard-counter {
+  font-size: 26px;
+  padding: 4px;
+}

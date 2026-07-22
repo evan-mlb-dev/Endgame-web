@@ -1,0 +1,59 @@
+<div class="modal-container">
+  <h3 class="modal-title">Sign In.</h3>
+
+  <mat-dialog-content>
+    <div class="error-message-container">
+      @if (errorMessage) {
+        <div class="error-banner">
+          <span class="error-icon">⚠️</span>
+          <span class="error-text">{{ errorMessage }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <input
+        [(ngModel)]="registerData.username"
+        name="username"
+        type="text"
+        placeholder="username"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+        [(ngModel)]="registerData.email"
+        name="email"
+        type="email"
+        placeholder="email address"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+        [(ngModel)]="registerData.password"
+        name="password"
+        type="password"
+        placeholder="password"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+        [(ngModel)]="registerData.confirmPassword"
+        name="confirmPassword"
+        type="password"
+        placeholder="confirm password"
+        required
+      />
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button class="secondary-btn" (click)="onCancel()">Cancel</button>
+    <button class="primary-btn" (click)="onSignIn()">Sign In</button>
+  </mat-dialog-actions>
+</div>

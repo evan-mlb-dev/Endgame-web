@@ -1,0 +1,19 @@
+.login-action {
+  display: flex;
+  padding-top: 1.2rem;
+  padding-bottom: 1rem;
+
+  .login-action-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+
+    a {
+      font-size: 18px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

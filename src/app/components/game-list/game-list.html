@@ -1,0 +1,19 @@
+<app-searchbar class="searchbar-container"
+(searchChange)="onSearch($event)">
+</app-searchbar>
+
+<app-dashboard class="dashboard-container"></app-dashboard>
+
+<div class="game-grid">
+  @for (game of games; track game.id) {
+    <app-game-card
+      class="stagger-item"
+      [class.animate-slide]="idBeingDeleted === game.id"
+      [style.--i]="$index"
+      [game]="game"
+      (remove)="deleteGame($event)">
+    </app-game-card>
+  } @empty {
+    <p>La liste est vide.</p>
+  }
+</div>

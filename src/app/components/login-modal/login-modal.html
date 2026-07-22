@@ -1,0 +1,28 @@
+<div class="modal-container">
+  <h3 class="modal-title">Login.</h3>
+
+  <mat-dialog-content>
+    <div class="form-group">
+      <input
+        [(ngModel)]="loginData.username"
+        name="username"
+        type="text"
+        placeholder="username"
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+        [(ngModel)]="loginData.password"
+        name="password"
+        type="password"
+        placeholder="password"
+      />
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button class="secondary-btn" (click)="onCancel()">Cancel</button>
+    <button class="primary-btn" (click)="onLogin()">Login</button>
+  </mat-dialog-actions>
+</div>
