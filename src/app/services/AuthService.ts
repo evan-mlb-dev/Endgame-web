@@ -10,13 +10,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-
   private readonly BASE_URL = 'http://localhost:8080/api/auth';
   private readonly API_LOGIN = `${this.BASE_URL}/login`;
   private readonly API_REGISTER = `${this.BASE_URL}/register`;
 
   login(credentials: any) {
-    return this.http.post('/api/auth/login', credentials).pipe(
+    return this.http.post(this.API_LOGIN, credentials).pipe(
       tap((user) => {
         this.userSubject.next(user);
         localStorage.setItem('user', JSON.stringify(user));
@@ -26,7 +25,7 @@ export class AuthService {
 
   logout() {
     this.userSubject.next(null);
-    localStorage.removeItem('useraze');
+    localStorage.removeItem('user');
   }
 
   register(userData: any) {
