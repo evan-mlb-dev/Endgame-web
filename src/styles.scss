@@ -2,21 +2,21 @@
 
 :root {
   /* Main colors */
-  --primary-color: #b24c63;
+  --primary-color: #f86a8b;
   --secondary-color: #00df9a;
-  --ternary-color: #353164;
+  --ternary-color: #7869ff;
   --bg-dark: #0b0e14;
   --card-bg: #34344a;
 
   /* Text */
-  --text-main: #ffffff;
-  --text-muted: #94a3b8;
+  --text-main: #94a3b8;
+  --text-main-2: #ffffff;
 }
 
 body {
   margin: 0;
   background-color: var(--bg-dark);
-  color: var(--text-main);
+  color: var(--text-main-2);
   font-family: "Rajdhani", sans-serif !important;
 }
 
@@ -50,7 +50,7 @@ a {
   background: linear-gradient(
       to right,
       var(--secondary-color) 50%,
-      var(--text-muted) 50%
+      var(--text-main) 50%
     )
     100% 0 / 200% 100%;
   background-size: 200% 100%;
@@ -129,7 +129,7 @@ mat-dialog-actions {
 .primary-btn {
   margin-left: 5px;
   background: var(--primary-color);
-  color: var(--text-main);
+  color: var(--text-main-2);
   border: none;
   padding: 8px 15px;
   border-radius: 5px;
@@ -138,7 +138,7 @@ mat-dialog-actions {
 
 .secondary-btn {
   background: var(--secondary-color);
-  color: var(--text-main);
+  color: var(--text-main-2);
   border: none;
   padding: 8px 15px;
   border-radius: 5px;
@@ -147,6 +147,6 @@ mat-dialog-actions {
 
 //// inputs
 input.ng-invalid.ng-touched {
-  border-color: #9b1c1c; /* Ton rouge d'erreur */
-  background-color: #fff6f6; /* Un fond très légèrement teinté */
+  border-color: #9b1c1c;
+  background-color: #fff6f6;
 }
