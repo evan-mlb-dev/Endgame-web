@@ -6,9 +6,6 @@
   background-color: var();
   margin: 50px;
   border-radius: 10px;
-
-
-
 }
 
 .dashboard-item {
@@ -17,10 +14,9 @@
   align-items: center;
   flex: 1;
 
-  .material-symbols-outlined{
+  .material-symbols-outlined {
     font-size: 40px;
   }
-
 
   &.plantoplay {
     color: var(--ternary-color);
@@ -44,4 +40,8 @@
 .dashboard-counter {
   font-size: 26px;
   padding: 4px;
+}
+
+.material-symbols-outlined {
+  padding-right: 5px;
 }
