@@ -4,16 +4,17 @@
 </app-searchbar>
 
 <div class="game-grid">
-  @for (game of games; track game.id) {
+  @for (game of games(); track game.id; let i = $index) {
     <app-game-card
+      [style.view-transition-name]="'card-' + game.id"
       class="stagger-item"
-      [class.animate-slide]="idBeingDeleted === game.id"
-      [style.--i]="$index"
+      [class.animate-slide]="idBeingDeleted() === game.id"
+      [style.--i]="i"
       [game]="game"
       (remove)="deleteGame($event)"
     >
     </app-game-card>
   } @empty {
-    <p>La liste est vide.</p>
+    <p>No game found.</p>
   }
 </div>

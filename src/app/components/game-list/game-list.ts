@@ -1,10 +1,10 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {GameService} from '../../services/gameService';
-import {GameCard} from '../game-card/game-card';
-import {Game} from '../../models/game';
-import {Searchbar} from '../searchbar/searchbar';
-import {Dashboard} from '../dashboard/dashboard';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { GameService } from '../../services/gameService';
+import { GameCard } from '../game-card/game-card';
+import { Game } from '../../models/game';
+import { Searchbar } from '../searchbar/searchbar';
+import { Dashboard } from '../dashboard/dashboard';
 
 @Component({
   selector: 'app-game-list',
@@ -15,60 +15,86 @@ import {Dashboard} from '../dashboard/dashboard';
 })
 export class GameList implements OnInit {
   private gameService = inject(GameService);
-  games: Game[] = [];
-  search: string = '';
+
+  // Signaux pour l'état réactif du composant
+  games = signal<Game[]>([]);
+  search = signal<string>('');
+  idBeingDeleted = signal<number | null>(null);
 
   ngOnInit(): void {
     this.loadGames();
   }
 
   loadGames() {
-    if (this.search.length === 0) {
-     /* Get 50 random games*/
+    const searchTerm = this.search();
+
+    if (searchTerm.length === 0) {
+      /* Get 50 random games */
       this.gameService.get50Games().subscribe({
         next: (data) => {
-
-          this.games = data.map(gameData => new Game(
-            gameData.id,
-            gameData.name,
-            gameData.released,
-            gameData.backgroundImage,
-            gameData.rating,
-            gameData.metacritic
-          ))
+          const mapped = data
+            .map(
+              (gameData) =>
+                new Game(
+                  gameData.id,
+                  gameData.name,
+                  gameData.released,
+                  gameData.backgroundImage,
+                  gameData.rating,
+                  gameData.metacritic,
+                ),
+            )
             .sort((a, b) => b.rating - a.rating);
+
+          this.games.set(mapped);
         },
         error: (err) => {
           console.error("Error can't load game list", err);
-        }
+        },
       });
-    }
-    else {
-      this.gameService.searchGames(this.search).subscribe({
+    } else {
+      this.gameService.searchGames(searchTerm).subscribe({
         next: (data) => {
-          this.games = data.map(gameData => new Game(
-            gameData.id,
-            gameData.name,
-            gameData.released,
-            gameData.backgroundImage,
-            gameData.rating,
-            gameData.metacritic
-          ));
+          const mapped = data.map(
+            (gameData) =>
+              new Game(
+                gameData.id,
+                gameData.name,
+                gameData.released,
+                gameData.backgroundImage,
+                gameData.rating,
+                gameData.metacritic,
+              ),
+          );
+
+          this.games.set(mapped);
         },
         error: (err) => {
-          console.error("0 games found.", err);
-        }
+          console.error('0 games found.', err);
+        },
       });
     }
   }
 
   onSearch(term: string) {
-    this.search = term;
+    this.search.set(term);
     this.loadGames();
   }
 
-  idBeingDeleted: number | null = null;
   deleteGame(gameId: number) {
-    this.games = this.games.filter(g => g.id !== gameId);
+    this.idBeingDeleted.set(gameId);
+
+    const performDelete = () => {
+      this.games.update((currentGames) =>
+        currentGames.filter((game) => game.id !== gameId),
+      );
+      this.idBeingDeleted.set(null);
+    };
+
+    if (document.startViewTransition) {
+      document.startViewTransition(() => performDelete());
+    } else {
+      performDelete();
+    }
   }
 }

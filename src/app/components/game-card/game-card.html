@@ -1,11 +1,10 @@
-<div #tiltCard class="game-card" [class.animate-disappear]="isAnimating">
-  <img class="game-card-image" [src]="game.backgroundImage" [alt]="game.name">
+<div #tiltCard class="game-card" [class.animate-disappear]="isDeleted">
+  <img class="game-card-image" [src]="game.backgroundImage" [alt]="game.name" />
   <div class="game-card-bg"></div>
   <div class="game-card-blob"></div>
 
   <div class="game-card-text-top-bg"></div>
   <div class="game-card-text-bg">
-
     <div class="game-card-text">
       <h3 class="game-card-name">{{ game.name }}</h3>
       <span class="game-card-badge">{{ game.releasedYear }}</span>
@@ -23,8 +22,3 @@
     </button>
   </div>
 </div>
-
-
-
-
-
