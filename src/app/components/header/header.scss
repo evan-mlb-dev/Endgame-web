@@ -1,6 +1,18 @@
 .app-header {
   display: flex;
   padding: 5px 10px;
+
+  .app-logo-container {
+    flex: 1 1 0;
+  }
+
+  .main-nav-container {
+    flex: 2 1 0;
+  }
+
+  .login-action-container {
+    flex: 1 1 0;
+  }
 }
 
 .app-title {
