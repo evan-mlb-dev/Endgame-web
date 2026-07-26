@@ -3,7 +3,7 @@
 .endgame-logo {
   position: relative;
   display: inline-block;
-  padding: 20px 0 0 15px;
+  padding-left: 20px;
   background-color: transparent;
 }
 
@@ -37,7 +37,7 @@
   left: 17px;
   width: 255px;
   height: 2px;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-primary-lighter);
   border-radius: 2px;
   z-index: 1;
   overflow: hidden;

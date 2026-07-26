@@ -1,28 +1,23 @@
 .app-header {
   display: flex;
   padding: 5px 10px;
+  height: 65px;
+  background-color: var(--bg-dark-lighter);
 
   .app-logo-container {
     flex: 1 1 0;
+    align-content: center;
   }
 
   .main-nav-container {
+    padding-top: 10px;
     flex: 2 1 0;
+    align-content: center;
   }
 
   .login-action-container {
+    padding-top: 5px;
     flex: 1 1 0;
+    align-content: center;
   }
-}
-
-.app-title {
-  width: 15%;
-}
-
-.main-nav-container {
-  width: 70%;
-}
-
-.login-action-container {
-  width: 15%;
 }
