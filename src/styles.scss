@@ -7,6 +7,7 @@
   --ternary-color: #7869ff;
   --bg-dark: #0b0e14;
   --card-bg: #34344a;
+  --bg-modal: #1a1d24;
 
   /* Text */
   --text-main: #94a3b8;
@@ -103,7 +104,14 @@ a {
 .modal-container {
   padding: 10px;
   width: 350px;
-  background-color: var;
+  background-color: var(--bg-modal);
+  border: 5px solid var(--secondary-color);
+  border-radius: 14px;
+
+  mat-dialog-actions button {
+    font-weight: 700;
+    font-size: 18px;
+  }
 }
 
 .modal-title {
@@ -124,6 +132,11 @@ a {
 
 mat-dialog-actions {
   padding-top: 10px;
+}
+
+.blur-backdrop {
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
 }
 
 .primary-btn {

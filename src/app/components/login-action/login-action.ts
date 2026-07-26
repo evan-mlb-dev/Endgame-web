@@ -17,12 +17,14 @@ export class LoginAction {
   openLoginModal() {
     this.dialog.open(LoginModal, {
       panelClass: 'login-modal',
+      backdropClass: 'blur-backdrop',
     });
   }
 
   openSignInModal() {
     this.dialog.open(SigninModal, {
       panelClass: 'signin-modal',
+      backdropClass: 'blur-backdrop',
     });
   }
 }
