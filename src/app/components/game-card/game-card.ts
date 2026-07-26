@@ -20,11 +20,7 @@ import { Game } from '../../models/game';
 })
 export class GameCard implements AfterViewInit, OnDestroy {
   @Input({ required: true }) game!: Game;
-
-  // Correction 1 : Typage du EventEmitter et renommage en "remove" pour matcher (remove) dans le HTML
   @Output() remove = new EventEmitter<number>();
-
-  // Correction 2 : Utilisation de ViewChild au lieu de ViewChildren pour cibler la carte unique
   @ViewChild('tiltCard') tiltCard?: ElementRef;
 
   isDeleted = false;
@@ -64,6 +60,6 @@ export class GameCard implements AfterViewInit, OnDestroy {
     this.isDeleted = true;
     setTimeout(() => {
       this.remove.emit(this.game.id);
-    }, 500);
+    }, 300);
   }
 }

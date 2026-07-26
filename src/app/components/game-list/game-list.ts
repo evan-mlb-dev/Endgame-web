@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameService } from '../../services/gameService';
 import { GameCard } from '../game-card/game-card';
@@ -15,8 +21,8 @@ import { Dashboard } from '../dashboard/dashboard';
 })
 export class GameList implements OnInit {
   private gameService = inject(GameService);
+  private cdr = inject(ChangeDetectorRef);
 
-  // Signaux pour l'état réactif du composant
   games = signal<Game[]>([]);
   search = signal<string>('');
   idBeingDeleted = signal<number | null>(null);
@@ -88,6 +94,7 @@ export class GameList implements OnInit {
       this.games.update((currentGames) =>
         currentGames.filter((game) => game.id !== gameId),
       );
+      this.cdr.detectChanges();
       this.idBeingDeleted.set(null);
     };
 
