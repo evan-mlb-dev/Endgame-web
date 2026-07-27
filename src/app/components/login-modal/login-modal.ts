@@ -12,7 +12,10 @@ import { AuthService } from '../../services/AuthService';
   styleUrl: 'login-modal.scss',
 })
 export class LoginModal {
-  loginData = { username: '', password: '' };
+  loginData = {
+    username: localStorage.getItem('username') || '',
+    password: '',
+  };
   private authService = inject(AuthService);
   errorMessage: string | null = null;
 
@@ -30,6 +33,7 @@ export class LoginModal {
 
     this.authService.login(this.loginData).subscribe({
       next: (response) => {
+        localStorage.setItem('username', this.loginData.username);
         this.dialogRef.close(response);
       },
       error: (errorResponse) => {
