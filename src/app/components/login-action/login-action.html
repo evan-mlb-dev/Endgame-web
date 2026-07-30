@@ -1,10 +1,28 @@
-<nav class="login-action">
-  <ul class="login-action-links">
-    <li>
-      <a (click)="openLoginModal()">Log in</a>
-    </li>
-    <li>
-      <a (click)="openSignInModal()" routerLinkActive="active">Sign In</a>
-    </li>
-  </ul>
-</nav>
+@if (currentSession; as session) {
+  <nav class="login-action">
+    <ul class="login-action-links">
+      <li>
+        <span class="material-symbols-outlined">
+          <span class="material-symbols-outlined"> account_circle </span>
+        </span>
+      </li>
+      <li>
+        <a>{{ currentSession.username }}</a>
+      </li>
+      <li>
+        <a (click)="logout()">Log out</a>
+      </li>
+    </ul>
+  </nav>
+} @else {
+  <nav class="login-action">
+    <ul class="login-action-links">
+      <li>
+        <a (click)="openLoginModal()">Log in</a>
+      </li>
+      <li>
+        <a (click)="openSignInModal()" routerLinkActive="active">Sign In</a>
+      </li>
+    </ul>
+  </nav>
+}

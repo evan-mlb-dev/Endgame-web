@@ -50,4 +50,9 @@ export class LoginAction {
       backdropClass: 'blur-backdrop',
     });
   }
+
+  logout() {
+    this.authService.logout();
+    this.currentSession = null;
+  }
 }
