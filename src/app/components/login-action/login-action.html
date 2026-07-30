@@ -2,12 +2,12 @@
   <nav class="login-action">
     <ul class="login-action-links">
       <li>
-        <span class="material-symbols-outlined">
-          <span class="material-symbols-outlined"> account_circle </span>
-        </span>
-      </li>
-      <li>
-        <a>{{ currentSession.username }}</a>
+        <div class="username-profil">
+          <span class="material-symbols-outlined user-profil-name-logo">
+            account_circle
+          </span>
+          <a class="user-profil-name">{{ currentSession.username }}</a>
+        </div>
       </li>
       <li>
         <a (click)="logout()">Log out</a>
