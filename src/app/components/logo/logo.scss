@@ -5,23 +5,23 @@
   display: inline-block;
   padding-left: 20px;
   background-color: transparent;
-}
 
-.logo-text {
-  font-family: "Orbitron", sans-serif;
-  font-size: 48px;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -1px;
-  line-height: 1;
-  position: relative;
-  z-index: 2;
+  .logo-text {
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(24px, 4vw, 48px);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -1px;
+    line-height: 1;
+    position: relative;
+    z-index: 2;
+  }
 }
 
 .glow-dot {
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  width: clamp(0.5px, 1.45vw, 8px);
+  height: clamp(0.5px, 1.45vw, 8px);
   background-color: var(--primary-color);
   border-radius: 50%;
   margin-left: 6px;
@@ -35,7 +35,7 @@
 .loading-bar {
   position: absolute;
   left: 17px;
-  width: 255px;
+  width: 95%;
   height: 2px;
   background-color: var(--bg-primary-lighter);
   border-radius: 2px;
