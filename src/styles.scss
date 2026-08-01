@@ -172,3 +172,38 @@ input.ng-invalid.ng-touched {
   border-color: #9b1c1c;
   background-color: #fff6f6;
 }
+
+/* ==========================================================================
+    CONFIGURATION DES THÈMES ET VARIABLES LOCALES PAR BOUTON
+   ========================================================================== */
+.dashboard-item {
+  /* --- THEME 1 : TO PLAY (Violet / BLue) --- */
+  &.toplay {
+    --btn-bg-color: #3e32a3;
+    --btn-hover-color: #5848c7;
+    --btn-text-color: #ffffff;
+    --btn-border-color: #2b2278;
+    --btn-glow-color: rgba(110, 86, 207, 0.3);
+    --btn-glow-hover: rgba(110, 86, 207, 0.6);
+  }
+
+  /* --- THEME 2 : PLAYING (Rose / Red) --- */
+  &.playing {
+    --btn-bg-color: #a01c3e;
+    --btn-hover-color: #ff2e63;
+    --btn-text-color: var(--primary-color);
+    --btn-border-color: #6e1028;
+    --btn-glow-color: rgba(255, 46, 99, 0.3);
+    --btn-glow-hover: rgba(255, 46, 99, 0.6);
+  }
+
+  /* --- THEME 3 : COMPLETED (Green) --- */
+  &.completed {
+    --btn-bg-color: #008f63;
+    --btn-hover-color: #00df9a;
+    --btn-text-color: var(--secondary-color);
+    --btn-border-color: #00573c;
+    --btn-glow-color: rgba(0, 223, 154, 0.3);
+    --btn-glow-hover: rgba(0, 223, 154, 0.6);
+  }
+}

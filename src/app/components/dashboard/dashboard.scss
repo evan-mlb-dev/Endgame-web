@@ -17,13 +17,23 @@
   border-radius: 8px;
   cursor: pointer;
   user-select: none;
+  opacity: 1;
 
-  /* Click animation */
+  color: var(--btn-text-color);
+  background-color: var(--btn-bg-color);
+  box-shadow:
+    0 6px 0 var(--btn-border-color),
+    0 10px 15px rgba(0, 0, 0, 0.4),
+    0 0 12px var(--btn-glow-color);
+
   transition:
     transform 0.1s ease,
     box-shadow 0.1s ease,
-    background-color 0.1s ease,
-    color 0.1s ease;
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  animation: activeHighlight 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    calc(var(--i) * 0.2s + 0.1s) backwards;
 
   .material-symbols-outlined {
     font-size: 32px;
@@ -42,84 +52,88 @@
     text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   }
 
-  /* --- THEME : TO PLAY (Violet) --- */
-  &.toplay {
-    color: var(--ternary-color);
-    background-color: #493dbd;
+  /* --- ÉTATS INTERACTIFS GÉNÉRIQUES --- */
+  &:hover {
+    background-color: var(--btn-hover-bg);
+    color: #ffffff;
+    transform: translateY(-2px);
     box-shadow:
-      0 6px 0 #2b2278,
-      0 10px 15px rgba(0, 0, 0, 0.4),
-      0 0 12px rgba(120, 105, 255, 0.3);
+      0 8px 0 var(--btn-border-color),
+      0 12px 20px rgba(0, 0, 0, 0.5),
+      0 0 20px var(--btn-glow-hover);
+  }
 
-    &:hover {
-      background-color: #7869ff;
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow:
-        0 8px 0 #2b2278,
-        0 12px 20px rgba(0, 0, 0, 0.5),
-        0 0 20px rgba(120, 105, 255, 0.6);
-    }
+  &:active {
+    transform: translateY(4px);
+    box-shadow:
+      0 2px 0 var(--btn-border-color),
+      0 4px 8px rgba(0, 0, 0, 0.4);
+  }
 
-    &:active {
-      transform: translateY(4px);
-      box-shadow:
-        0 2px 0 #2b2278,
-        0 4px 8px rgba(0, 0, 0, 0.4);
-    }
+  /* --- THEME : TO PLAY (Purple) --- */
+  &.toplay {
+    --btn-bg-color: #493dbd;
+    --btn-hover-bg: #7869ff;
+    --btn-text-color: var(--ternary-color);
+    --btn-border-color: #2b2278;
+    --btn-glow-color: rgba(120, 105, 255, 0.3);
+    --btn-glow-hover: rgba(120, 105, 255, 0.6);
   }
 
   /* --- THEME : PLAYING (Pink) --- */
   &.playing {
-    color: var(--primary-color);
-    background-color: #a01c3e;
-    box-shadow:
-      0 6px 0 #6e1028,
-      0 10px 15px rgba(0, 0, 0, 0.4),
-      0 0 12px rgba(255, 46, 99, 0.3);
-
-    &:hover {
-      background-color: #ff2e63;
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow:
-        0 8px 0 #6e1028,
-        0 12px 20px rgba(0, 0, 0, 0.5),
-        0 0 20px rgba(255, 46, 99, 0.6);
-    }
-
-    &:active {
-      transform: translateY(4px);
-      box-shadow:
-        0 2px 0 #6e1028,
-        0 4px 8px rgba(0, 0, 0, 0.4);
-    }
+    --btn-bg-color: #a01c3e;
+    --btn-hover-bg: #ff2e63;
+    --btn-text-color: var(--primary-color);
+    --btn-border-color: #6e1028;
+    --btn-glow-color: rgba(255, 46, 99, 0.3);
+    --btn-glow-hover: rgba(255, 46, 99, 0.6);
   }
 
   /* --- THEME : COMPLETED (Green) --- */
   &.completed {
-    color: var(--secondary-color);
-    background-color: #008f63;
+    --btn-bg-color: #008f63;
+    --btn-hover-bg: #00df9a;
+    --btn-text-color: var(--secondary-color);
+    --btn-border-color: #00573c;
+    --btn-glow-color: rgba(0, 223, 154, 0.3);
+    --btn-glow-hover: rgba(0, 223, 154, 0.6);
+  }
+}
+
+/* --- KEYFRAME DYNAMIQUE SPAWN --- */
+@keyframes activeHighlight {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+    background-color: var(--btn-hover-bg);
+    color: #ffffff;
     box-shadow:
-      0 6px 0 #00573c,
+      0 8px 0 var(--btn-border-color),
+      0 12px 20px rgba(0, 0, 0, 0.5),
+      0 0 20px var(--btn-glow-hover);
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(4px);
+    background-color: var(--btn-hover-bg);
+    color: #ffffff;
+    box-shadow:
+      0 8px 0 var(--btn-border-color),
+      0 12px 20px rgba(0, 0, 0, 0.5),
+      0 0 20px var(--btn-glow-hover);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    background-color: var(--btn-bg-color);
+    color: var(--btn-text-color);
+    box-shadow:
+      0 6px 0 var(--btn-border-color),
       0 10px 15px rgba(0, 0, 0, 0.4),
-      0 0 12px rgba(0, 223, 154, 0.3);
-
-    &:hover {
-      background-color: #00df9a;
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow:
-        0 8px 0 #00573c,
-        0 12px 20px rgba(0, 0, 0, 0.5),
-        0 0 20px rgba(0, 223, 154, 0.6);
-    }
-
-    &:active {
-      transform: translateY(4px);
-      box-shadow:
-        0 2px 0 #00573c,
-        0 4px 8px rgba(0, 0, 0, 0.4);
-    }
+      0 0 12px var(--btn-glow-color);
   }
 }

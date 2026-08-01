@@ -1,17 +1,21 @@
-<div class="dashboard">
-  <div class="dashboard-item toplay">
-    <span class="material-symbols-outlined">calendar_add_on</span>
-    <div class="dashboard-item-text">TO_PLAY :</div>
-    <div class="dashboard-counter">5</div>
+@if (gameCounts) {
+  <div class="dashboard">
+    <div class="dashboard-item toplay" style="--i: 0">
+      <span class="material-symbols-outlined">calendar_add_on</span>
+      <div class="dashboard-item-text">TO_PLAY :</div>
+      <div class="dashboard-counter">{{ gameCounts?.TO_PLAY ?? 0 }}</div>
+    </div>
+
+    <div class="dashboard-item playing" style="--i: 1">
+      <span class="material-symbols-outlined">gamepad</span>
+      <div class="dashboard-item-text">PLAYING :</div>
+      <div class="dashboard-counter">{{ gameCounts?.PLAYING ?? 0 }}</div>
+    </div>
+
+    <div class="dashboard-item completed" style="--i: 2">
+      <span class="material-symbols-outlined">check_box</span>
+      <div class="dashboard-item-text">COMPLETED :</div>
+      <div class="dashboard-counter">{{ gameCounts?.COMPLETED ?? 0 }}</div>
+    </div>
   </div>
-  <div class="dashboard-item playing">
-    <span class="material-symbols-outlined">gamepad</span>
-    <div class="dashboard-item-text">PLAYING :</div>
-    <div class="dashboard-counter">4</div>
-  </div>
-  <div class="dashboard-item completed">
-    <span class="material-symbols-outlined">check_box</span>
-    <div class="dashboard-item-text">COMPLETED :</div>
-    <div class="dashboard-counter">11</div>
-  </div>
-</div>
+}
