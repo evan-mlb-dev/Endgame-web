@@ -3,7 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LoginModal } from '../login-modal/login-modal';
 import { SigninModal } from '../signin-modal/signin-modal';
-import { AuthService } from '@app/services/AuthService';
+import { AuthService } from '@app/services/authService';
 import { Session } from '@app/models/session';
 import { Subscription } from 'rxjs';
 @Component({

@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  inject,
   Input,
   OnDestroy,
   Output,
@@ -10,6 +11,8 @@ import {
 } from '@angular/core';
 import VanillaTilt from 'vanilla-tilt';
 import { Game } from '../../models/game';
+import { GameStatus } from '@app/models/game-status.enum';
+import { UserGameService } from '@app/services/userGameService';
 
 @Component({
   selector: 'app-game-card',
@@ -23,14 +26,16 @@ export class GameCard implements AfterViewInit, OnDestroy {
   @Output() remove = new EventEmitter<number>();
   @ViewChild('tiltCard') tiltCard?: ElementRef;
 
-  isDeleted = false;
+  constructor(private hostElement: ElementRef) {}
+  public userGameService = inject(UserGameService);
+  public isDeleted = false;
+  public GameStatus = GameStatus;
 
   ngAfterViewInit() {
     this.initTilt();
   }
 
   initTilt() {
-    // Si la référence #tiltCard existe dans le HTML
     const cardEl =
       this.tiltCard?.nativeElement || this.hostElement.nativeElement;
 
@@ -45,6 +50,16 @@ export class GameCard implements AfterViewInit, OnDestroy {
     });
   }
 
+  addGameTo(gameStatus: GameStatus) {
+    if (this.game.id) {
+      this.userGameService.addUserGame(this.game.id, gameStatus).subscribe({
+        next: (res) => console.log('Success !', res),
+        error: (err) => console.error('Error :', err),
+      });
+      this.onDelete();
+    }
+  }
+
   ngOnDestroy() {
     const cardEl =
       this.tiltCard?.nativeElement || this.hostElement.nativeElement;
@@ -53,13 +68,10 @@ export class GameCard implements AfterViewInit, OnDestroy {
     }
   }
 
-  constructor(private hostElement: ElementRef) {}
-
-  /* Delete Card */
   onDelete() {
     this.isDeleted = true;
     setTimeout(() => {
       this.remove.emit(this.game.id);
-    }, 300);
+    }, 500);
   }
 }

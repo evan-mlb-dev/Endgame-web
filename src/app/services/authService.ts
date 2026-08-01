@@ -9,18 +9,13 @@ export class AuthService {
   private readonly BASE_URL = 'http://localhost:8080/api/auth';
   private readonly API_LOGIN = `${this.BASE_URL}/login`;
   private readonly API_REGISTER = `${this.BASE_URL}/register`;
-
   private userSessionBehavior = new BehaviorSubject<Session | null>(
     this.getSessionFromStorage(),
   );
-
   userSession$: Observable<Session | null> =
     this.userSessionBehavior.asObservable();
 
-  constructor(private http: HttpClient) {
-    console.debug(this.userSession$);
-    console.debug(localStorage);
-  }
+  constructor(private http: HttpClient) {}
 
   login(credentials: any) {
     return this.http.post(this.API_LOGIN, credentials).pipe(

@@ -11,13 +11,22 @@
     </div>
   </div>
   <div class="game-card-actions">
-    <button class="game-card-button game-card-action-1" (click)="onDelete()">
+    <button
+      class="game-card-button game-card-action-1"
+      (click)="addGameTo(GameStatus.TO_PLAY)"
+    >
       <span class="material-symbols-outlined">calendar_add_on</span>
     </button>
-    <button class="game-card-button game-card-action-2" (click)="onDelete()">
+    <button
+      class="game-card-button game-card-action-2"
+      (click)="addGameTo(GameStatus.PLAYING)"
+    >
       <span class="material-symbols-outlined">gamepad</span>
     </button>
-    <button class="game-card-button game-card-action-3" (click)="onDelete()">
+    <button
+      class="game-card-button game-card-action-3"
+      (click)="addGameTo(GameStatus.COMPLETED)"
+    >
       <span class="material-symbols-outlined">check_box</span>
     </button>
   </div>

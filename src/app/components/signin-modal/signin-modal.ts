@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { AuthService } from '../../services/AuthService';
+import { AuthService } from '../../services/authService';
 import { ThisReceiver } from '@angular/compiler';
 @Component({
   selector: 'app-signin-modal',
