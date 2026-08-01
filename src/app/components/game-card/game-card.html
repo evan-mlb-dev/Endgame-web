@@ -1,33 +1,39 @@
-<div #tiltCard class="game-card" [class.animate-disappear]="isDeleted">
-  <img class="game-card-image" [src]="game.backgroundImage" [alt]="game.name" />
-  <div class="game-card-bg"></div>
-  <div class="game-card-blob"></div>
+@if (game.backgroundImage) {
+  <div #tiltCard class="game-card" [class.animate-disappear]="isDeleted">
+    <img
+      class="game-card-image"
+      [src]="game.backgroundImage"
+      [alt]="game.name"
+    />
+    <div class="game-card-bg"></div>
+    <div class="game-card-blob"></div>
 
-  <div class="game-card-text-top-bg"></div>
-  <div class="game-card-text-bg">
-    <div class="game-card-text">
-      <h3 class="game-card-name">{{ game.name }}</h3>
-      <span class="game-card-badge">{{ game.releasedYear }}</span>
+    <div class="game-card-text-top-bg"></div>
+    <div class="game-card-text-bg">
+      <div class="game-card-text">
+        <h3 class="game-card-name">{{ game.name }}</h3>
+        <span class="game-card-badge">{{ game.releasedYear }}</span>
+      </div>
+    </div>
+    <div class="game-card-actions">
+      <button
+        class="game-card-button game-card-action-1"
+        (click)="addGameTo(GameStatus.TO_PLAY)"
+      >
+        <span class="material-symbols-outlined">calendar_add_on</span>
+      </button>
+      <button
+        class="game-card-button game-card-action-2"
+        (click)="addGameTo(GameStatus.PLAYING)"
+      >
+        <span class="material-symbols-outlined">gamepad</span>
+      </button>
+      <button
+        class="game-card-button game-card-action-3"
+        (click)="addGameTo(GameStatus.COMPLETED)"
+      >
+        <span class="material-symbols-outlined">check_box</span>
+      </button>
     </div>
   </div>
-  <div class="game-card-actions">
-    <button
-      class="game-card-button game-card-action-1"
-      (click)="addGameTo(GameStatus.TO_PLAY)"
-    >
-      <span class="material-symbols-outlined">calendar_add_on</span>
-    </button>
-    <button
-      class="game-card-button game-card-action-2"
-      (click)="addGameTo(GameStatus.PLAYING)"
-    >
-      <span class="material-symbols-outlined">gamepad</span>
-    </button>
-    <button
-      class="game-card-button game-card-action-3"
-      (click)="addGameTo(GameStatus.COMPLETED)"
-    >
-      <span class="material-symbols-outlined">check_box</span>
-    </button>
-  </div>
-</div>
+}

@@ -2,7 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { UserGameResponseDto } from '@app/models/userGameResponseDto';
-import { GameStatus } from '@app/models/game-status.enum';
+import { GameStatus, GameStatusCounts } from '@app/models/game-status.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +12,10 @@ export class UserGameService {
   private BASE_URL = 'http://localhost:8080/api/usergame';
 
   public lastUpdatedGame = signal<UserGameResponseDto | null>(null);
+
+  getGameCounts(): Observable<GameStatusCounts> {
+    return this.http.get<GameStatusCounts>(`${this.BASE_URL}/counts`);
+  }
 
   addUserGame(
     gameId: number,

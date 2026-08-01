@@ -5,3 +5,5 @@ export enum GameStatus {
   DROPPED = 'DROPPED',
   ON_HOLD = 'ON_HOLD',
 }
+
+export type GameStatusCounts = Record<GameStatus, number>;
