@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, startWith, Subject, tap } from 'rxjs';
 import { UserGameResponseDto } from '@app/models/userGameResponseDto';
 import { GameStatus, GameStatusCounts } from '@app/models/game-status.enum';
 
@@ -12,11 +12,16 @@ export class UserGameService {
   private BASE_URL = 'http://localhost:8080/api/usergame';
   public lastUpdatedGame = signal<UserGameResponseDto | null>(null);
 
+  // Game Counts Behavior
   private gameCountsSubject = new BehaviorSubject<GameStatusCounts | null>(
     null,
   );
   public gameCounts$: Observable<GameStatusCounts | null> =
     this.gameCountsSubject.asObservable();
+  // Animation Behavior
+  private animatedStatusSubject = new Subject<keyof GameStatusCounts>();
+  public animatedStatus$: Observable<keyof GameStatusCounts | null> =
+    this.animatedStatusSubject.asObservable();
 
   public incrementGameCount(
     status: keyof GameStatusCounts,
@@ -30,6 +35,7 @@ export class UserGameService {
       ...currentCounts,
       [status]: (currentCounts[status] || 0) + amount,
     });
+    this.animatedStatusSubject.next(status);
   }
 
   refreshGameCounts(): void {
