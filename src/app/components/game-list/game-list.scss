@@ -1,8 +1,15 @@
+.sticky-top {
+  padding-top: 75px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
 .game-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 20px;
+  padding: 10px 20px;
   gap: 40px;
 
   app-game-card {
@@ -18,10 +25,14 @@
   animation-delay: min(calc(var(--i) * 0.1s), 1.5s);
 }
 
+.dashboard-container {
+  display: block;
+  background-color: var(--bg-dark-lighter);
+}
 .searchbar-container {
   display: flex;
   justify-content: center;
-  margin: 25px 0;
+  margin-top: 10px;
 }
 
 @keyframes fadeInGrid {

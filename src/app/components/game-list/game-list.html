@@ -1,7 +1,8 @@
-<app-dashboard class="dashboard-container"></app-dashboard>
-
-<app-searchbar class="searchbar-container" (searchChange)="onSearch($event)">
-</app-searchbar>
+<div class="sticky-top">
+  <app-dashboard class="dashboard-container"></app-dashboard>
+  <app-searchbar class="searchbar-container" (searchChange)="onSearch($event)">
+  </app-searchbar>
+</div>
 
 <div class="game-grid">
   @for (game of games(); track game.id; let i = $index) {
