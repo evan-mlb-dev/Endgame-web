@@ -58,6 +58,7 @@ export class GameCard implements AfterViewInit, OnDestroy {
       });
       this.onDelete();
     }
+    this.userGameService.incrementGameCount(gameStatus);
   }
 
   ngOnDestroy() {

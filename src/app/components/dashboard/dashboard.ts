@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { GameStatusCounts } from '@app/models/game-status.enum';
 import { UserGameService } from '@app/services/userGameService';
-import { Observable } from 'rxjs/internal/Observable';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,19 +11,19 @@ import { Observable } from 'rxjs/internal/Observable';
   styleUrl: './dashboard.scss',
   standalone: true,
 })
-export class Dashboard implements OnInit {
+export class Dashboard implements OnInit, OnDestroy {
   private userGameService = inject(UserGameService);
   gameCounts: GameStatusCounts | null = null;
-  gameCounts$!: Observable<GameStatusCounts>;
+  private sub?: Subscription;
 
   ngOnInit(): void {
-    this.userGameService.getGameCounts().subscribe({
-      next: (counts) => {
-        this.gameCounts = counts;
-      },
-      error: (err) => {
-        console.error('Error, cant get game counts', err);
-      },
+    this.userGameService.refreshGameCounts();
+    this.sub = this.userGameService.gameCounts$.subscribe((counts) => {
+      this.gameCounts = counts;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 }

@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { UserGameResponseDto } from '@app/models/userGameResponseDto';
 import { GameStatus, GameStatusCounts } from '@app/models/game-status.enum';
 
@@ -10,8 +10,38 @@ import { GameStatus, GameStatusCounts } from '@app/models/game-status.enum';
 export class UserGameService {
   private http = inject(HttpClient);
   private BASE_URL = 'http://localhost:8080/api/usergame';
-
   public lastUpdatedGame = signal<UserGameResponseDto | null>(null);
+
+  private gameCountsSubject = new BehaviorSubject<GameStatusCounts | null>(
+    null,
+  );
+  public gameCounts$: Observable<GameStatusCounts | null> =
+    this.gameCountsSubject.asObservable();
+
+  public incrementGameCount(
+    status: keyof GameStatusCounts,
+    amount: number = 1,
+  ): void {
+    const currentCounts = this.gameCountsSubject.getValue();
+
+    if (!currentCounts) return;
+
+    this.gameCountsSubject.next({
+      ...currentCounts,
+      [status]: (currentCounts[status] || 0) + amount,
+    });
+  }
+
+  refreshGameCounts(): void {
+    this.getGameCounts().subscribe({
+      next: (counts) => {
+        this.gameCountsSubject.next(counts);
+      },
+      error: (err) => {
+        console.error('Error, cant get game counts', err);
+      },
+    });
+  }
 
   getGameCounts(): Observable<GameStatusCounts> {
     return this.http.get<GameStatusCounts>(`${this.BASE_URL}/counts`);
