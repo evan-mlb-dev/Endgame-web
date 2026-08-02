@@ -1,4 +1,4 @@
-<div class="sticky-top">
+<div class="sticky-top" [class.scrolled]="isScrolled()">
   <app-dashboard class="dashboard-container"></app-dashboard>
   <app-searchbar class="searchbar-container" (searchChange)="onSearch($event)">
   </app-searchbar>

@@ -1,10 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  inject,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameService } from '../../services/gameService';
 import { GameCard } from '../game-card/game-card';
@@ -21,11 +15,17 @@ import { Dashboard } from '../dashboard/dashboard';
 })
 export class GameList implements OnInit {
   private gameService = inject(GameService);
-  private cdr = inject(ChangeDetectorRef);
 
   games = signal<Game[]>([]);
   search = signal<string>('');
   idBeingDeleted = signal<number | null>(null);
+
+  public isScrolled = signal<boolean>(false);
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    this.isScrolled.set(window.scrollY > 10);
+  }
 
   ngOnInit(): void {
     this.loadGames();
@@ -35,7 +35,6 @@ export class GameList implements OnInit {
     const searchTerm = this.search();
 
     if (searchTerm.length === 0) {
-      /* Get 50 random games */
       this.gameService.get50Games().subscribe({
         next: (data) => {
           const mapped = data
@@ -94,7 +93,6 @@ export class GameList implements OnInit {
       this.games.update((currentGames) =>
         currentGames.filter((game) => game.id !== gameId),
       );
-      this.cdr.detectChanges();
       this.idBeingDeleted.set(null);
     };
 
