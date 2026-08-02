@@ -205,7 +205,7 @@
   background-color: var(--primary-color);
   opacity: 1;
   filter: blur(12px);
-  animation: blob-bounce 6s infinite linear;
+  animation: blob-bounce 30s infinite linear;
 }
 
 .animate-disappear {
@@ -237,23 +237,23 @@
 
 @keyframes blob-bounce {
   0% {
-    transform: translate(-100%, -100%) translate3d(0, 0, 0);
+    transform: translate(-100%, -100%) translate3d(-20%, -20%, 0);
   }
 
   25% {
-    transform: translate(-100%, -100%) translate3d(100%, 0, 0);
+    transform: translate(-100%, -100%) translate3d(120%, -20%, 0);
   }
 
   50% {
-    transform: translate(-100%, -100%) translate3d(100%, 100%, 0);
+    transform: translate(-100%, -100%) translate3d(120%, 120%, 0);
   }
 
   75% {
-    transform: translate(-100%, -100%) translate3d(0, 100%, 0);
+    transform: translate(-100%, -100%) translate3d(-20%, 120%, 0);
   }
 
   100% {
-    transform: translate(-100%, -100%) translate3d(0, 0, 0);
+    transform: translate(-100%, -100%) translate3d(-20%, -20%, 0);
   }
 }
 
