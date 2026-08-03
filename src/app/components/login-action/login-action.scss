@@ -4,8 +4,8 @@
 
   .login-action-links {
     display: flex;
-    list-style: none;
     gap: 20px;
+    list-style: none;
 
     a {
       font-size: 23px;
@@ -17,17 +17,18 @@
   }
 
   .username-profil {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .user-profil-name {
       color: var(--ternary-color);
     }
+
     .user-profil-name-logo {
-      padding: 0;
       margin: 0;
+      padding: 0;
       color: var(--ternary-color);
     }
   }
