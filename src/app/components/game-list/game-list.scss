@@ -1,17 +1,17 @@
-.sticky-top {
-  padding-top: 75px;
+.sticky-top-searchbar {
+  margin-top: 165px;
   position: sticky;
-  top: 0;
+  top: 165px;
   z-index: 100;
 
   &::after {
     content: "";
     position: absolute;
 
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: -175px;
+    top: -120px;
+    left: -50px;
+    right: -50px;
+    bottom: -155px;
 
     background: linear-gradient(
       135deg,
@@ -22,17 +22,15 @@
     backdrop-filter: blur(25px) saturate(180%);
     -webkit-backdrop-filter: blur(25px) saturate(180%);
 
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-
     mask-image: radial-gradient(
       ellipse at center,
       rgba(0, 0, 0, 1) 25%,
-      rgba(0, 0, 0, 0) 90%
+      rgba(0, 0, 0, 0) 75%
     );
     -webkit-mask-image: radial-gradient(
       ellipse at center,
       rgba(0, 0, 0, 1) 25%,
-      rgba(0, 0, 0, 0) 90%
+      rgba(0, 0, 0, 0) 75%
     );
 
     z-index: -1;
