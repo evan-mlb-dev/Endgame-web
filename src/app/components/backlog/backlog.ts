@@ -6,6 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './backlog.html',
   styleUrl: './backlog.scss',
 })
-export class Backlog {
-
-}
+export class Backlog {}

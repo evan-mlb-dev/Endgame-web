@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-searchbar',
   imports: [],
   templateUrl: './searchbar.html',
   styleUrl: './searchbar.scss',
-  standalone: true
+  standalone: true,
 })
 export class Searchbar {
   @Output() searchChange = new EventEmitter<string>();

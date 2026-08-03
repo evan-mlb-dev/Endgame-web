@@ -14,7 +14,7 @@ export class Game {
     released: string,
     backgroundImage: string,
     rating: number,
-    metacritic?: number
+    metacritic?: number,
   ) {
     this.id = id;
     this.name = name;
