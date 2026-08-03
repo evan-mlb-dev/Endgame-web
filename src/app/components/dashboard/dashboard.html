@@ -5,16 +5,19 @@
       [class.initial-animation]="animatedStatus() === null"
       style="--i: 0"
     >
-      <div
+      <button
+        type="button"
         class="dashboard-item toplay"
         [class.initial-animation]="animatedStatus() === null"
         [class.animated]="animatedStatus() === 'TO_PLAY'"
         style="--i: 0"
+        [routerLink]="['/backlog']"
+        [queryParams]="{ status: 'TO_PLAY' }"
       >
         <span class="material-symbols-outlined">calendar_add_on</span>
         <div class="dashboard-item-text">TO PLAY :</div>
         <div class="dashboard-counter">{{ gameCounts?.TO_PLAY ?? 0 }}</div>
-      </div>
+      </button>
     </div>
 
     <div
@@ -22,16 +25,19 @@
       [class.initial-animation]="animatedStatus() === null"
       style="--i: 1"
     >
-      <div
+      <button
+        type="button"
         class="dashboard-item playing"
         [class.initial-animation]="animatedStatus() === null"
         [class.animated]="animatedStatus() === 'PLAYING'"
         style="--i: 1"
+        [routerLink]="['/backlog']"
+        [queryParams]="{ status: 'PLAYING' }"
       >
         <span class="material-symbols-outlined">gamepad</span>
         <div class="dashboard-item-text">PLAYING :</div>
         <div class="dashboard-counter">{{ gameCounts?.PLAYING ?? 0 }}</div>
-      </div>
+      </button>
     </div>
 
     <div
@@ -39,16 +45,19 @@
       [class.initial-animation]="animatedStatus() === null"
       style="--i: 2"
     >
-      <div
+      <button
+        type="button"
         class="dashboard-item completed"
         [class.initial-animation]="animatedStatus() === null"
         [class.animated]="animatedStatus() === 'COMPLETED'"
         style="--i: 2"
+        [routerLink]="['/backlog']"
+        [queryParams]="{ status: 'COMPLETED' }"
       >
         <span class="material-symbols-outlined">check_box</span>
         <div class="dashboard-item-text">ENDED :</div>
         <div class="dashboard-counter">{{ gameCounts?.COMPLETED ?? 0 }}</div>
-      </div>
+      </button>
     </div>
   </div>
 }

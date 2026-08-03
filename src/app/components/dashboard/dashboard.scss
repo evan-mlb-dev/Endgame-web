@@ -22,7 +22,7 @@
 }
 
 /* ==========================================================================
-   2. BUTTON
+   2. BUTTONs
    ========================================================================== */
 .dashboard-item {
   font-family: "Orbitron", sans-serif;
@@ -31,6 +31,8 @@
   align-items: center;
   flex: 1;
   gap: 4px;
+  border: none;
+  outline: none;
   border-radius: 8px;
   cursor: pointer;
   user-select: none;
