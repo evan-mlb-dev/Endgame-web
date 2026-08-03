@@ -1,15 +1,14 @@
-import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
+import { Game } from '../../models/game';
 import { GameService } from '../../services/gameService';
 import { GameCard } from '../game-card/game-card';
-import { Game } from '../../models/game';
 import { Searchbar } from '../searchbar/searchbar';
-import { Dashboard } from '../dashboard/dashboard';
 
 @Component({
   selector: 'app-game-list',
   standalone: true,
-  imports: [CommonModule, GameCard, Searchbar, Dashboard],
+  imports: [CommonModule, GameCard, Searchbar],
   templateUrl: './game-list.html',
   styleUrl: './game-list.scss',
 })
