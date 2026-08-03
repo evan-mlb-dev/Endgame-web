@@ -1,8 +1,12 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, startWith, Subject, tap } from 'rxjs';
-import { UserGameResponseDto } from '@app/models/userGameResponseDto';
+import {
+  UserGameResponseDto,
+  UserGamesDto,
+} from '@app/models/dto/userGameResponseDto';
 import { GameStatus, GameStatusCounts } from '@app/models/game-status.enum';
+import { UserGamesMap } from '@app/models/userGame';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +50,16 @@ export class UserGameService {
       error: (err) => {
         console.error('Error, cant get game counts', err);
       },
+    });
+  }
+
+  getUserGames(status?: GameStatus | null): Observable<UserGamesMap> {
+    let params = new HttpParams();
+    if (status) {
+      params = params;
+    }
+    return this.http.get<UserGamesMap>(`${this.BASE_URL}`, {
+      params,
     });
   }
 
