@@ -7,10 +7,14 @@
   --primary-color: #ff2e63;
   --secondary-color: #00df9a;
   --ternary-color: #7869ff;
+
+  /* Main colors Bg */
   --bg-primary: #1a090e;
   --bg-primary-lighter: #ff2e6340;
   --bg-secondary: #091a15;
   --bg-ternary: #120f24;
+
+  /* Bg colors */
   --bg-dark: #0b0e14;
   --bg-dark-lighter: #12161f;
   --bg-modal: #1a1d24;
@@ -43,6 +47,53 @@
   --btn-completed-border: #00573c;
   --btn-completed-glow: rgb(0 223 154 / 30%);
   --btn-completed-glow-hover: rgb(0 223 154 / 60%);
+
+  .light-theme {
+    /* Main colors */
+    --primary-color: #e6004c;
+    --secondary-color: #00a875;
+    --ternary-color: #5b4bf7;
+
+    /* Main colors Bg */
+    --bg-primary: #1a090e;
+    --bg-primary-lighter: #ff2e6340;
+    --bg-secondary: #091a15;
+    --bg-ternary: #120f24;
+
+    /* Backgrounds */
+    --bg-dark: #b9cde2;
+    --bg-dark-lighter: #12161f;
+    --bg-modal: #fff;
+    --card-bg: #fff;
+
+    /* Text */
+    --text-main: #64748b;
+    --text-main-2: #cdcfd3;
+
+    /* Button theme - To Play */
+    --btn-toplay-bg: #493dbd;
+    --btn-toplay-hover-bg: #7869ff;
+    --btn-toplay-text: var(--ternary-color);
+    --btn-toplay-border: #2b2278;
+    --btn-toplay-glow: rgb(120 105 255 / 30%);
+    --btn-toplay-glow-hover: rgb(120 105 255 / 60%);
+
+    /* Button theme - Playing */
+    --btn-playing-bg: #a01c3e;
+    --btn-playing-hover-bg: #ff2e63;
+    --btn-playing-text: var(--primary-color);
+    --btn-playing-border: #6e1028;
+    --btn-playing-glow: rgb(255 46 99 / 30%);
+    --btn-playing-glow-hover: rgb(255 46 99 / 60%);
+
+    /* Button theme - Completed */
+    --btn-completed-bg: #008f63;
+    --btn-completed-hover-bg: #00df9a;
+    --btn-completed-text: var(--secondary-color);
+    --btn-completed-border: #00573c;
+    --btn-completed-glow: rgb(0 223 154 / 30%);
+    --btn-completed-glow-hover: rgb(0 223 154 / 60%);
+  }
 }
 
 html {
