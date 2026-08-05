@@ -1,1 +1,9 @@
-<div class="backlog-container">BACKLOG PLACEHOLDER</div>
+<div class="backlog-container">
+  @if (status() == "TO_PLAY") {
+    <app-to-play></app-to-play>
+  } @else if (status() == "ENDED") {
+    <app-ended></app-ended>
+  } @else {
+    <app-playing></app-playing>
+  }
+</div>
