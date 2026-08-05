@@ -26,8 +26,11 @@
    2. BUTTONs
    ========================================================================== */
 .dashboard-item {
+  will-change: transform, opacity;
   cursor: pointer;
   user-select: none;
+
+  transform: translateZ(0);
 
   display: flex;
   flex: 1;
@@ -41,6 +44,7 @@
   font-family: Orbitron, sans-serif;
   color: var(--btn-text-color);
 
+  backface-visibility: hidden;
   background-color: var(--btn-bg-color);
   outline: none;
   box-shadow:

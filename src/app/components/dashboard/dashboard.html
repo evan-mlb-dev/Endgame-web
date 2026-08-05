@@ -11,8 +11,7 @@
         [class.initial-animation]="animatedStatus() === null"
         [class.animated]="animatedStatus() === 'TO_PLAY'"
         style="--i: 0"
-        [routerLink]="['/backlog']"
-        [queryParams]="{ status: 'TO_PLAY' }"
+        (click)="navigateToStatus('TO_PLAY')"
       >
         <span class="material-symbols-outlined">calendar_add_on</span>
         <div class="dashboard-item-text">TO PLAY :</div>
@@ -31,8 +30,7 @@
         [class.initial-animation]="animatedStatus() === null"
         [class.animated]="animatedStatus() === 'PLAYING'"
         style="--i: 1"
-        [routerLink]="['/backlog']"
-        [queryParams]="{ status: 'PLAYING' }"
+        (click)="navigateToStatus('PLAYING')"
       >
         <span class="material-symbols-outlined">gamepad</span>
         <div class="dashboard-item-text">PLAYING :</div>
@@ -51,8 +49,7 @@
         [class.initial-animation]="animatedStatus() === null"
         [class.animated]="animatedStatus() === 'COMPLETED'"
         style="--i: 2"
-        [routerLink]="['/backlog']"
-        [queryParams]="{ status: 'COMPLETED' }"
+        (click)="navigateToStatus('COMPLETED')"
       >
         <span class="material-symbols-outlined">check_box</span>
         <div class="dashboard-item-text">ENDED :</div>

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { GameStatusCounts } from '@app/models/game-status.enum';
 import { AuthService } from '@app/services/authService';
 import { UserGameService } from '@app/services/userGameService';
@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
   standalone: true,
@@ -17,12 +17,23 @@ export class Dashboard implements OnInit, OnDestroy {
   // services
   private userGameService = inject(UserGameService);
   private authService = inject(AuthService);
+  private router = inject(Router);
+
   // vars
   gameCounts: GameStatusCounts | null = null;
   animatedStatus = signal<string | null>(null);
+
   // subs
   private subCounts?: Subscription;
   private subAnimation?: Subscription;
+
+  navigateToStatus(status: string): void {
+    this.triggerAnimation(status);
+
+    setTimeout(() => {
+      this.router.navigate(['/backlog'], { queryParams: { status } });
+    }, 100);
+  }
 
   ngOnInit(): void {
     if (this.authService.isSessionValid()) {
