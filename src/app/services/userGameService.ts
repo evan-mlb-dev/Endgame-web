@@ -1,12 +1,9 @@
-import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, startWith, Subject, tap } from 'rxjs';
-import {
-  UserGameResponseDto,
-  UserGamesDto,
-} from '@app/models/dto/userGameResponseDto';
+import { inject, Injectable, signal } from '@angular/core';
+import { UserGameResponseDto } from '@app/models/dto/userGameResponseDto';
 import { GameStatus, GameStatusCounts } from '@app/models/game-status.enum';
 import { UserGamesMap } from '@app/models/userGame';
+import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
