@@ -19,6 +19,30 @@
   /* Text */
   --text-main: #94a3b8;
   --text-main-2: #fff;
+
+  /* Button theme - To Play */
+  --btn-toplay-bg: #493dbd;
+  --btn-toplay-hover-bg: #7869ff;
+  --btn-toplay-text: var(--ternary-color);
+  --btn-toplay-border: #2b2278;
+  --btn-toplay-glow: rgb(120 105 255 / 30%);
+  --btn-toplay-glow-hover: rgb(120 105 255 / 60%);
+
+  /* Button theme - Playing */
+  --btn-playing-bg: #a01c3e;
+  --btn-playing-hover-bg: #ff2e63;
+  --btn-playing-text: var(--primary-color);
+  --btn-playing-border: #6e1028;
+  --btn-playing-glow: rgb(255 46 99 / 30%);
+  --btn-playing-glow-hover: rgb(255 46 99 / 60%);
+
+  /* Button theme - Completed */
+  --btn-completed-bg: #008f63;
+  --btn-completed-hover-bg: #00df9a;
+  --btn-completed-text: var(--secondary-color);
+  --btn-completed-border: #00573c;
+  --btn-completed-glow: rgb(0 223 154 / 30%);
+  --btn-completed-glow-hover: rgb(0 223 154 / 60%);
 }
 
 html {
