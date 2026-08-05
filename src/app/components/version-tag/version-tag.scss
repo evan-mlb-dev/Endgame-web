@@ -1,0 +1,8 @@
+.version-tag {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end; /* 👈 Aligne le contenu Flex à droite */
+
+  font-family: Orbitron, sans-serif;
+  text-align: right; /* 👈 S'assure que le texte multiligne reste aligné à droite */
+}

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { VersionTag } from '../version-tag/version-tag';
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  imports: [VersionTag],
   templateUrl: './footer.html',
   styleUrl: './footer.scss',
 })
