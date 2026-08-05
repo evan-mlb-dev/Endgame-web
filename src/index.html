@@ -23,6 +23,23 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+
+    <script>
+      (function () {
+        const THEME_KEY = "endgame-theme";
+        const savedTheme = localStorage.getItem(THEME_KEY);
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+
+        const isDark =
+          savedTheme !== null ? savedTheme === "dark" : prefersDark;
+
+        if (!isDark) {
+          document.documentElement.classList.add("light-theme");
+        }
+      })();
+    </script>
   </head>
   <body>
     <app-root></app-root>

@@ -23,9 +23,12 @@
       padding-top: 10px;
     }
 
-    .login-action-container {
+    .nav-modules-container {
+      display: flex;
       flex: 1 1 0;
       align-content: center;
+      align-items: center;
+
       padding-top: 10px;
     }
   }
