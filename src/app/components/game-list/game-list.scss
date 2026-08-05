@@ -50,15 +50,45 @@
 .game-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 30px;
   justify-content: center;
 
   padding: 10px 20px;
 
-  app-game-card {
-    flex: 0 1 400px;
-    min-width: 250px;
-    transition: all 0.5s ease;
+  /* --- Variante Petite Taille --- */
+  &.size-small {
+    gap: 20px;
+
+    app-game-card {
+      flex: 0 1 200px;
+      min-width: 160px;
+    }
+
+    .game-card {
+      --card-height: 140px;
+      --card-radius: 10px;
+      --card-hover-text-y: -85px;
+      --card-hover-text-size: 22px;
+      --card-hover-text-z: 30px;
+      --card-hover-actions-z: 40px;
+    }
+  }
+
+  /* --- Variante Grande Taille (Par défaut) --- */
+  &.size-large {
+    app-game-card {
+      flex: 0 1 400px;
+      min-width: 300px;
+    }
+
+    .game-card {
+      --card-height: 250px;
+      --card-radius: 14px;
+      --card-hover-text-y: -175px;
+      --card-hover-text-size: 40px;
+      --card-hover-text-z: 40px;
+      --card-hover-actions-z: 60px;
+    }
   }
 }
 

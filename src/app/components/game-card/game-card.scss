@@ -1,4 +1,11 @@
 .game-card {
+  --card-height: 250px;
+  --card-radius: 14px;
+  --card-hover-text-y: -175px;
+  --card-hover-text-size: 40px;
+  --card-hover-text-z: 40px;
+  --card-hover-actions-z: 60px;
+
   transform-style: preserve-3d;
   transform: perspective(1000px);
 
@@ -8,9 +15,9 @@
   align-items: center;
   justify-content: center;
 
-  width: 400px;
-  height: 250px;
-  border-radius: 14px;
+  width: 100%;
+  height: var(--card-height);
+  border-radius: var(--card-radius);
 
   background: var(--card-bg);
   box-shadow:
@@ -26,7 +33,7 @@
     }
 
     .game-card-actions {
-      transform: translateY(0) translateZ(60px);
+      transform: translateY(0) translateZ(var(--card-hover-actions-z));
       opacity: 1;
     }
 
@@ -35,8 +42,9 @@
     }
 
     .game-card-text {
-      transform: translateZ(40px) translateY(-175px);
-      font-size: 40px;
+      transform: translateZ(var(--card-hover-text-z))
+        translateY(var(--card-hover-text-y));
+      font-size: var(--card-hover-text-size);
       animation: move-and-fade 0.4s ease-out;
     }
 
@@ -60,23 +68,6 @@
   }
 }
 
-.game-card-image {
-  position: absolute;
-  z-index: 2;
-  top: 5px;
-  left: 5px;
-
-  width: calc(100% - 10px);
-  height: calc(100% - 10px);
-  border-radius: 10px;
-
-  object-fit: cover;
-
-  transition:
-    filter 0.5s ease,
-    transform 0.5s ease;
-}
-
 .game-card-bg {
   position: absolute;
   z-index: 1;
@@ -85,11 +76,28 @@
 
   overflow: hidden;
 
-  width: 390px;
-  height: 240px;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
   border-radius: inherit;
 
   outline: 2px solid var(--card-bg);
+}
+
+.game-card-image {
+  position: absolute;
+  z-index: 2;
+  top: 5px;
+  left: 5px;
+
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  border-radius: inherit;
+
+  object-fit: cover;
+
+  transition:
+    filter 0.5s ease,
+    transform 0.5s ease;
 }
 
 .game-card-text-top-bg {
@@ -142,7 +150,8 @@
 
   transition:
     transform 0.3s ease-out,
-    opacity 0.3s;
+    opacity 0.3s,
+    font-size 0.3s ease-out;
 
   .game-card-name {
     overflow: hidden;
@@ -263,52 +272,4 @@
 
 .game-card-button:active::after {
   animation: ripple 0.4s ease-out;
-}
-
-@keyframes blob-bounce {
-  0% {
-    transform: translate(-100%, -100%) translate3d(-20%, -20%, 0);
-  }
-
-  25% {
-    transform: translate(-100%, -100%) translate3d(120%, -20%, 0);
-  }
-
-  50% {
-    transform: translate(-100%, -100%) translate3d(120%, 120%, 0);
-  }
-
-  75% {
-    transform: translate(-100%, -100%) translate3d(-20%, 120%, 0);
-  }
-
-  100% {
-    transform: translate(-100%, -100%) translate3d(-20%, -20%, 0);
-  }
-}
-
-@keyframes move-and-fade {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.1;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes ripple {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(-50%, -50%) scale(10);
-    opacity: 0;
-  }
 }

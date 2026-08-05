@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { Game } from '../../models/game';
 import { GameService } from '../../services/gameService';
+import { CardSize } from '../game-card/cardsize';
 import { GameCard } from '../game-card/game-card';
 import { Searchbar } from '../searchbar/searchbar';
 
@@ -15,11 +16,12 @@ import { Searchbar } from '../searchbar/searchbar';
 export class GameList implements OnInit {
   private gameService = inject(GameService);
 
+  // signals
   games = signal<Game[]>([]);
   search = signal<string>('');
   idBeingDeleted = signal<number | null>(null);
-
-  public isScrolled = signal<boolean>(false);
+  cardSize = signal<CardSize>('large');
+  isScrolled = signal<boolean>(false);
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {

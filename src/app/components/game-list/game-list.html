@@ -3,7 +3,7 @@
   </app-searchbar>
 </div>
 
-<div class="game-grid">
+<div class="game-grid" [class]="'game-grid size-' + cardSize()">
   @for (game of games(); track game.id; let i = $index) {
     <app-game-card
       [style.view-transition-name]="'card-' + game.id"
