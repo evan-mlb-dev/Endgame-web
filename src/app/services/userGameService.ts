@@ -76,6 +76,19 @@ export class UserGameService {
     });
   }
 
+  // Dans UserGameService
+  getUserGamesIds(
+    userGames: Partial<Record<GameStatus, UserGame[]>> | null,
+  ): string[] {
+    if (!userGames) {
+      return [];
+    }
+    return Object.values(userGames)
+      .flat()
+      .filter((game): game is UserGame => game?.id != null)
+      .map((game) => String(game.id));
+  }
+
   getUserGames(status?: GameStatus | null): Observable<UserGamesMap> {
     let params = new HttpParams();
     if (status) {

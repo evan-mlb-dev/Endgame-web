@@ -1,11 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { Game } from '@app/models/game';
+import { UserGame } from '@app/models/userGame';
+import { UserGameService } from '@app/services/userGameService';
+import { GameCard } from '../game-card/game-card';
 
 @Component({
   selector: 'app-to-play',
-  imports: [],
+  imports: [GameCard],
   templateUrl: './to-play.html',
   styleUrl: './to-play.scss',
 })
 export class ToPlay {
+  //service
+  userGameService: UserGameService = inject(UserGameService);
 
+  //vars
+  cardSize = 'small';
+  @Input() uGames!: UserGame[] | undefined;
+  @Input() games!: Game[] | undefined;
+
+  //subs
 }
