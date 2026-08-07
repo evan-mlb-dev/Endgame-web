@@ -15,7 +15,9 @@
       >
         <span class="material-symbols-outlined">calendar_add_on</span>
         <div class="dashboard-item-text">TO PLAY :</div>
-        <div class="dashboard-counter">{{ gameCounts.TO_PLAY }}</div>
+        <div class="dashboard-counter">
+          {{ gameCounts.TO_PLAY ? gameCounts.TO_PLAY : 0 }}
+        </div>
       </button>
     </div>
 
@@ -34,7 +36,9 @@
       >
         <span class="material-symbols-outlined">gamepad</span>
         <div class="dashboard-item-text">PLAYING :</div>
-        <div class="dashboard-counter">{{ gameCounts.PLAYING }}</div>
+        <div class="dashboard-counter">
+          {{ gameCounts.PLAYING ? gameCounts.PLAYING : 0 }}
+        </div>
       </button>
     </div>
 
@@ -53,7 +57,9 @@
       >
         <span class="material-symbols-outlined">check_box</span>
         <div class="dashboard-item-text">ENDED :</div>
-        <div class="dashboard-counter">{{ gameCounts.COMPLETED }}</div>
+        <div class="dashboard-counter">
+          {{ gameCounts.COMPLETED ? gameCounts.COMPLETED : 0 }}
+        </div>
       </button>
     </div>
   </div>
