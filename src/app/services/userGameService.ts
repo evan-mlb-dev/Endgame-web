@@ -55,6 +55,16 @@ export class UserGameService {
     });
   }
 
+  resetGameCounts(): void {
+    this.gameCountsSubject.next({
+      TO_PLAY: 0,
+      PLAYING: 0,
+      COMPLETED: 0,
+      DROPPED: 0,
+      ON_HOLD: 0,
+    });
+  }
+
   refreshUserGames(): void {
     this.getUserGames().subscribe({
       next: (uGames) => {

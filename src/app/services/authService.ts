@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Session } from '@app/models/session';
 import { Observable, tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { UserGameService } from './userGameService';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -10,28 +11,34 @@ export class AuthService {
   private readonly API_LOGIN = `${this.BASE_URL}/login`;
   private readonly API_REGISTER = `${this.BASE_URL}/register`;
 
+  // Services
+  private userGameService = inject(UserGameService);
+  // Behaviors
   private userSessionBehavior = new BehaviorSubject<Session | null>(
     this.getSessionFromStorage(),
   );
-
+  // Obs
   userSession$: Observable<Session | null> =
     this.userSessionBehavior.asObservable();
 
   constructor(private http: HttpClient) {}
 
+  // authService.ts
   login(credentials: any) {
     return this.http.post(this.API_LOGIN, credentials).pipe(
       tap((sessionJson) => {
         const session = Session.fromJson(sessionJson);
         this.userSessionBehavior.next(session);
         localStorage.setItem('userSession', JSON.stringify(session));
+        this.userGameService.refreshGameCounts();
       }),
     );
   }
-
   logout() {
     localStorage.removeItem('userSession');
     this.userSessionBehavior.next(null);
+    // reset user vars
+    this.userGameService.resetGameCounts();
   }
 
   register(userData: any) {
