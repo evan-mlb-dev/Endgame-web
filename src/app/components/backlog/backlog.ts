@@ -8,13 +8,12 @@ import { UserGameService } from '@app/services/userGameService';
 import { Subscription } from 'rxjs';
 import { Ended } from '../ended/ended';
 import { CardSize } from '../game-card/cardsize';
-import { GameCard } from '../game-card/game-card';
 import { Playing } from '../playing/playing';
 import { ToPlay } from '../to-play/to-play';
 
 @Component({
   selector: 'app-backlog',
-  imports: [Playing, ToPlay, Ended, GameCard],
+  imports: [Playing, ToPlay, Ended],
   templateUrl: './backlog.html',
   styleUrl: './backlog.scss',
 })
@@ -27,6 +26,9 @@ export class Backlog {
   userGames: Partial<Record<GameStatus, UserGame[]>> | null = null;
   // Déclaration en Signal
   games = signal<Game[]>([]);
+  gamesToPlay = signal<Game[]>([]);
+  gamesPlaying = signal<Game[]>([]);
+  gamesEnded = signal<Game[]>([]);
   status = input<string>();
   cardSizeBacklog = signal<CardSize>('small');
   //subs
@@ -46,8 +48,35 @@ export class Backlog {
 
             if (ids.length > 0) {
               this.gameService.getGamesByIds(ids).subscribe((gamesData) => {
+                // 1. Global update
                 this.games.set(gamesData);
-                console.debug(this.games);
+
+                // 2. Filter by games status
+                if (userGames) {
+                  // Extract Ids
+                  const toPlayIds = new Set(
+                    userGames.TO_PLAY?.map((ug) => ug.id) ?? [],
+                  );
+                  const playingIds = new Set(
+                    userGames.PLAYING?.map((ug) => ug.id) ?? [],
+                  );
+                  const endedIds = new Set([
+                    ...(userGames.COMPLETED?.map((ug) => ug.id) ?? []),
+                    ...(userGames.DROPPED?.map((ug) => ug.id) ?? []),
+                    ...(userGames.ON_HOLD?.map((ug) => ug.id) ?? []),
+                  ]);
+
+                  // set Signals
+                  this.gamesToPlay.set(
+                    gamesData.filter((game) => toPlayIds.has(game.id)),
+                  );
+                  this.gamesPlaying.set(
+                    gamesData.filter((game) => playingIds.has(game.id)),
+                  );
+                  this.gamesEnded.set(
+                    gamesData.filter((game) => endedIds.has(game.id)),
+                  );
+                }
               });
             }
           }

@@ -1,1 +1,15 @@
-<p>playing works!</p>
+<div class="game-grid" [class]="'game-grid size-' + cardSizeBacklog">
+  @if (games; as gamesList) {
+    @for (game of gamesList; track game.id; let i = $index) {
+      <app-game-card
+        [style.view-transition-name]="'card-' + game.id"
+        class="stagger-item"
+        [style.--i]="i"
+        [game]="game"
+      >
+      </app-game-card>
+    } @empty {
+      <p>Aucun jeu disponible.</p>
+    }
+  }
+</div>
