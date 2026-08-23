@@ -6,8 +6,8 @@ const targetPath = "./src/environments/environment.ts";
 const envConfigFile = `export const environment = {
   production: true,
   rawgApiKey: ${JSON.stringify(process.env.RAWG_API_KEY || "")},
-  apiUrl: ${JSON.stringify(process.env.API_URL || "https://api.rawg.io/api")},
-  version_tag: ${JSON.stringify(process.env.VERSION_TAG || "1.0.0")}
+  apiUrl: ${JSON.stringify(process.env.API_URL || "")},
+  version_tag: ${JSON.stringify(process.env.VERSION_TAG || "v0.0.0")}
 };
 `;
 
