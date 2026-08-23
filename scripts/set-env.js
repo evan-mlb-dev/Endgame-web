@@ -1,21 +1,16 @@
 const fs = require("fs");
 
-// env variables from Vercel
 const targetPath = "./src/environments/environment.ts";
 
+// Get Vercel env variables
 const envConfigFile = `export const environment = {
   production: true,
-  rawgApiKey: '${process.env.RAWG_API_KEY || ""}',
-  apiUrl: '${process.env.API_URL || "https://api.rawg.io/api"}'
-  version_tag : '${process.env.VERSION_TAG}
+  rawgApiKey: ${JSON.stringify(process.env.RAWG_API_KEY || "")},
+  apiUrl: ${JSON.stringify(process.env.API_URL || "https://api.rawg.io/api")},
+  version_tag: ${JSON.stringify(process.env.VERSION_TAG || "1.0.0")}
 };
 `;
 
-// write file
-fs.writeFileSync(targetPath, envConfigFile, function (err) {
-  if (err) {
-    console.error(err);
-  } else {
-    console.log(`environment.ts généré avec succès dans ${targetPath}`);
-  }
-});
+// Write to environment.ts
+fs.writeFileSync(targetPath, envConfigFile);
+console.log(`environment.ts generated successfully at ${targetPath}`);
