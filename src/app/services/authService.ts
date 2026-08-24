@@ -25,16 +25,19 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   // authService.ts
-  login(credentials: any) {
-    return this.http.post(this.API_LOGIN, credentials).pipe(
-      tap((sessionJson) => {
-        const session = Session.fromJson(sessionJson);
-        this.userSessionBehavior.next(session);
-        localStorage.setItem('userSession', JSON.stringify(session));
-        this.userGameService.refreshGameCounts();
-      }),
-    );
+
+  register(userData: any) {
+    return this.http
+      .post(this.API_REGISTER, userData)
+      .pipe(tap((sessionJson) => this.handleSessionSuccess(sessionJson)));
   }
+
+  login(credentials: any) {
+    return this.http
+      .post(this.API_LOGIN, credentials)
+      .pipe(tap((sessionJson) => this.handleSessionSuccess(sessionJson)));
+  }
+
   logout() {
     localStorage.removeItem('userSession');
     this.userSessionBehavior.next(null);
@@ -42,8 +45,11 @@ export class AuthService {
     this.userGameService.resetGameCounts();
   }
 
-  register(userData: any) {
-    return this.http.post(this.API_REGISTER, userData);
+  private handleSessionSuccess(sessionJson: any): void {
+    const session = Session.fromJson(sessionJson);
+    this.userSessionBehavior.next(session);
+    localStorage.setItem('userSession', JSON.stringify(session));
+    this.userGameService.refreshGameCounts();
   }
 
   public getCurrentSession(): Session | null {
