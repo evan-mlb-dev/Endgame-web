@@ -15,6 +15,7 @@
     .logo-container {
       flex: 1 1 0;
       align-content: center;
+      padding-left: 20px;
     }
 
     .main-nav-container {
@@ -26,10 +27,18 @@
     .nav-modules-container {
       display: flex;
       flex: 1 1 0;
-      align-content: center;
-      align-items: center;
-
       padding-top: 10px;
+      padding-right: 20px;
+
+      .nav-modules {
+        display: flex;
+        flex: 1;
+        place-content: flex-end;
+        align-items: center;
+        justify-content: end;
+
+        padding-right: 20px;
+      }
     }
   }
 }
