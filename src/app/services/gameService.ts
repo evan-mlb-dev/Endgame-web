@@ -2,12 +2,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Game } from '@app/models/game';
 import { Observable, of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class GameService {
   private http = inject(HttpClient);
 
-  private readonly BASE_URL = 'http://localhost:8080/api/games';
+  private readonly BASE_URL = `${environment.apiUrl}/games`;
   private readonly API_50_GAMES = `${this.BASE_URL}/50R`;
   private readonly API_SEARCH_GAME = `${this.BASE_URL}/search`;
   private readonly API_BY_IDS = `${this.BASE_URL}/by-ids`;

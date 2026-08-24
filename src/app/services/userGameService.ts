@@ -4,13 +4,14 @@ import { UserGameResponseDto } from '@app/models/dto/userGameResponseDto';
 import { GameStatus, GameStatusCounts } from '@app/models/game-status.enum';
 import { UserGame, UserGamesMap } from '@app/models/userGame';
 import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserGameService {
   private http = inject(HttpClient);
-  private BASE_URL = 'http://localhost:8080/api/usergame';
+  private BASE_URL = `${environment.apiUrl}/usergame`;
   public lastUpdatedGame = signal<UserGameResponseDto | null>(null);
 
   // Behaviors

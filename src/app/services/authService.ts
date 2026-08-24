@@ -3,11 +3,12 @@ import { inject, Injectable } from '@angular/core';
 import { Session } from '@app/models/session';
 import { Observable, tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { environment } from '../../environments/environment';
 import { UserGameService } from './userGameService';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly BASE_URL = 'http://localhost:8080/api/auth';
+  private readonly BASE_URL = `${environment.apiUrl}/auth`;
   private readonly API_LOGIN = `${this.BASE_URL}/login`;
   private readonly API_REGISTER = `${this.BASE_URL}/register`;
 

@@ -5,8 +5,8 @@ const targetPath = "./src/environments/environment.ts";
 // Get Vercel env variables
 const envConfigFile = `export const environment = {
   production: true,
-  rawgApiKey: ${JSON.stringify(process.env.RAWG_API_KEY || "")},
-  apiUrl: ${JSON.stringify(process.env.API_URL || "")},
+  rawgApiKey: ${JSON.stringify(process.env.RAWG_API_KEY || "EMPTY_ENV_VAR")},
+  apiUrl: ${JSON.stringify(process.env.API_URL || "EMPTY_ENV_VAR")},
   version_tag: ${JSON.stringify(process.env.VERSION_TAG || "v0.0.0")}
 };
 `;
