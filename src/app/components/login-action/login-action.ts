@@ -1,22 +1,19 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { LoginModal } from '../login-modal/login-modal';
-import { SigninModal } from '../signin-modal/signin-modal';
-import { AuthService } from '@app/services/authService';
 import { Session } from '@app/models/session';
+import { AuthService } from '@app/services/authService';
+import { ModalService } from '@app/services/modalService';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-login-action',
   standalone: true,
-  imports: [MatDialogModule],
   templateUrl: 'login-action.html',
   styleUrl: 'login-action.scss',
 })
 export class LoginAction {
-  constructor(private dialog: MatDialog) {}
-
+  // Service
   private authService = inject(AuthService);
+  public modalService = inject(ModalService);
+
   private sessionSubscription!: Subscription;
   public currentSession: Session | null = null;
 
@@ -35,20 +32,6 @@ export class LoginAction {
     if (this.sessionSubscription) {
       this.sessionSubscription.unsubscribe();
     }
-  }
-
-  openLoginModal() {
-    this.dialog.open(LoginModal, {
-      panelClass: 'login-modal',
-      backdropClass: 'blur-backdrop',
-    });
-  }
-
-  openSignInModal() {
-    this.dialog.open(SigninModal, {
-      panelClass: 'signin-modal',
-      backdropClass: 'blur-backdrop',
-    });
   }
 
   logout() {

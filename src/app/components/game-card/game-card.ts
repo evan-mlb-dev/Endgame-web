@@ -9,10 +9,12 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { GameStatus } from '@app/models/game-status.enum';
+import { AuthService } from '@app/services/authService';
+import { ModalService } from '@app/services/modalService';
+import { UserGameService } from '@app/services/userGameService';
 import VanillaTilt from 'vanilla-tilt';
 import { Game } from '../../models/game';
-import { GameStatus } from '@app/models/game-status.enum';
-import { UserGameService } from '@app/services/userGameService';
 
 @Component({
   selector: 'app-game-card',
@@ -26,10 +28,15 @@ export class GameCard implements AfterViewInit, OnDestroy {
   @Output() remove = new EventEmitter<number>();
   @ViewChild('tiltCard') tiltCard?: ElementRef;
 
-  constructor(private hostElement: ElementRef) {}
+  // Service
   public userGameService = inject(UserGameService);
+  public modalService = inject(ModalService);
+  private authService = inject(AuthService);
+  // Vars
   public isDeleted = false;
   public GameStatus = GameStatus;
+
+  constructor(private hostElement: ElementRef) {}
 
   ngAfterViewInit() {
     this.initTilt();
@@ -51,7 +58,9 @@ export class GameCard implements AfterViewInit, OnDestroy {
   }
 
   addGameTo(gameStatus: GameStatus) {
-    if (this.game.id) {
+    if (!this.authService.isSessionValid()) {
+      this.modalService.openSignInModal();
+    } else if (this.game.id) {
       this.userGameService.addUserGame(this.game.id, gameStatus).subscribe({
         next: (res) => console.log('Success !', res),
         error: (err) => console.error('Error :', err),

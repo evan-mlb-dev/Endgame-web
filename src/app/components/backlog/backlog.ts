@@ -4,6 +4,7 @@ import { GameStatus } from '@app/models/game-status.enum';
 import { UserGame } from '@app/models/userGame';
 import { AuthService } from '@app/services/authService';
 import { GameService } from '@app/services/gameService';
+import { ModalService } from '@app/services/modalService';
 import { UserGameService } from '@app/services/userGameService';
 import { Subscription } from 'rxjs';
 import { Ended } from '../ended/ended';
@@ -22,6 +23,7 @@ export class Backlog {
   private userGameService = inject(UserGameService);
   private gameService = inject(GameService);
   private authService = inject(AuthService);
+  private modalService = inject(ModalService);
   //vars
   userGames: Partial<Record<GameStatus, UserGame[]>> | null = null;
   // Déclaration en Signal
@@ -81,7 +83,7 @@ export class Backlog {
         },
       );
     } else {
-      console.error('ANONYMOUS USER');
+      this.modalService.openSignInModal();
     }
   }
   ngOnDestroy(): void {
