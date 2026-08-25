@@ -1,8 +1,6 @@
 <div class="modal-container">
   <h3 class="modal-title">Login.</h3>
 
-  <div id="google-btn"></div>
-
   <mat-dialog-content>
     <div class="error-message-container">
       @if (errorMessage) {
@@ -29,6 +27,14 @@
         type="password"
         placeholder="password"
       />
+    </div>
+
+    <div class="divider">
+      <span>OR</span>
+    </div>
+
+    <div class="google-btn-wrapper">
+      <div id="google-btn"></div>
     </div>
   </mat-dialog-content>
 

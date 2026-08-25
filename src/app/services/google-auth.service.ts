@@ -13,20 +13,12 @@ export class GoogleAuthService {
 
   private readonly googleClientId = environment['google.client.id'];
 
-  /**
-   * Initialise le SDK Google et affiche le bouton officiel dans l'élément HTML ciblé
-   * @param elementId L'identifiant de la div hôte (ex: 'google-btn')
-   * @param onSuccess Callback exécuté en cas de connexion réussie
-   * @param onError Callback exécuté en cas d'erreur
-   */
-
-  public renderButton(
-    elementId: string,
+  public signIn(
     onSuccess: (response: any) => void,
     onError: (error: any) => void,
   ): void {
     if (typeof google === 'undefined' || !google.accounts) {
-      onError("Le SDK Google N'est pas disponible.");
+      onError('Google SDK failed.');
       return;
     }
 
