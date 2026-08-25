@@ -3,4 +3,7 @@ export const environment = {
   apiUrl: 'EMPTY_ENV_VAR',
   apiKey: 'EMPTY_ENV_VAR',
   version_tag: 'v0.0.0',
+
+  'google.client.id': 'EMPTY_ENV_VAR',
+  'google.client.secret': 'EMPTY_ENV_VAR',
 };

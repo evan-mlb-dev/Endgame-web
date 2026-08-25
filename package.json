@@ -31,6 +31,7 @@
     "@angular/material": "^20.2.14",
     "@angular/platform-browser": "^20.1.0",
     "@angular/router": "^20.1.0",
+    "@react-oauth/google": "^0.13.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "vanilla-tilt": "^1.8.1",

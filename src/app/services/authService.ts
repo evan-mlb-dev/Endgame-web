@@ -11,6 +11,7 @@ export class AuthService {
   private readonly BASE_URL = `${environment.apiUrl}/auth`;
   private readonly API_LOGIN = `${this.BASE_URL}/login`;
   private readonly API_REGISTER = `${this.BASE_URL}/register`;
+  private readonly API_GOOGLE = `${this.BASE_URL}/google`;
 
   // Services
   private userGameService = inject(UserGameService);
@@ -24,8 +25,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // authService.ts
-
   register(userData: any) {
     return this.http
       .post(this.API_REGISTER, userData)
@@ -35,6 +34,12 @@ export class AuthService {
   login(credentials: any) {
     return this.http
       .post(this.API_LOGIN, credentials)
+      .pipe(tap((sessionJson) => this.handleSessionSuccess(sessionJson)));
+  }
+
+  loginWithGoogle(googleToken: string) {
+    return this.http
+      .post(this.API_GOOGLE, { token: googleToken })
       .pipe(tap((sessionJson) => this.handleSessionSuccess(sessionJson)));
   }
 
