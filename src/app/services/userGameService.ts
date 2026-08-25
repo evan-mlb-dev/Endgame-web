@@ -86,8 +86,8 @@ export class UserGameService {
     }
     return Object.values(userGames)
       .flat()
-      .filter((game): game is UserGame => game?.id != null)
-      .map((game) => String(game.id));
+      .filter((game): game is UserGame => game?.gameId != null)
+      .map((game) => String(game.gameId));
   }
 
   getUserGames(status?: GameStatus | null): Observable<UserGamesMap> {

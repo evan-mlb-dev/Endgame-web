@@ -31,6 +31,7 @@
 
   width: clamp(0.5px, 1.45vw, 8px);
   height: clamp(0.5px, 1.45vw, 8px);
+  margin-right: 20px;
   margin-left: 6px;
   border-radius: 50%;
 
@@ -47,11 +48,11 @@
 .loading-bar {
   position: absolute;
   z-index: 1;
-  left: 17px;
+  left: 1px;
 
   overflow: hidden;
 
-  width: 95%;
+  width: 288px;
   height: 2px;
   border-radius: 2px;
 

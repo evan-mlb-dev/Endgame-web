@@ -17,10 +17,6 @@ export class GameService {
     return this.http.get<any[]>(this.BASE_URL);
   }
 
-  getGameByIds(): Observable<any[]> {
-    return this.http.get<any[]>(this.BASE_URL);
-  }
-
   get50Games(): Observable<any[]> {
     return this.http.get<any[]>(this.API_50_GAMES);
   }

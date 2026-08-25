@@ -41,29 +41,27 @@ export class Backlog {
       this.subUserGames = this.userGameService.userGames$.subscribe(
         (userGames) => {
           this.userGames = userGames;
-          console.debug(this.userGames);
 
           if (userGames) {
-            const ids = this.userGameService.getUserGamesIds(userGames);
+            const gameIds = this.userGameService.getUserGamesIds(userGames);
 
-            if (ids.length > 0) {
-              this.gameService.getGamesByIds(ids).subscribe((gamesData) => {
+            if (gameIds.length > 0) {
+              this.gameService.getGamesByIds(gameIds).subscribe((gamesData) => {
                 // 1. Global update
                 this.games.set(gamesData);
-
                 // 2. Filter by games status
                 if (userGames) {
-                  // Extract Ids
+                  // Extract Game Ids
                   const toPlayIds = new Set(
-                    userGames.TO_PLAY?.map((ug) => ug.id) ?? [],
+                    userGames.TO_PLAY?.map((ug) => ug.gameId) ?? [],
                   );
                   const playingIds = new Set(
-                    userGames.PLAYING?.map((ug) => ug.id) ?? [],
+                    userGames.PLAYING?.map((ug) => ug.gameId) ?? [],
                   );
                   const endedIds = new Set([
-                    ...(userGames.COMPLETED?.map((ug) => ug.id) ?? []),
-                    ...(userGames.DROPPED?.map((ug) => ug.id) ?? []),
-                    ...(userGames.ON_HOLD?.map((ug) => ug.id) ?? []),
+                    ...(userGames.COMPLETED?.map((ug) => ug.gameId) ?? []),
+                    ...(userGames.DROPPED?.map((ug) => ug.gameId) ?? []),
+                    ...(userGames.ON_HOLD?.map((ug) => ug.gameId) ?? []),
                   ]);
 
                   // set Signals
