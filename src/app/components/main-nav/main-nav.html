@@ -13,8 +13,15 @@
         routerLink="/backlog"
         [queryParams]="{ status: 'PLAYING' }"
         routerLinkActive="active"
-        >Backlog</a
+        [routerLinkActiveOptions]="{
+          matrixParams: 'ignored',
+          queryParams: 'ignored',
+          paths: 'subset',
+          fragment: 'ignored',
+        }"
       >
+        Backlog
+      </a>
     </li>
     <li>
       <a routerLink="/planner" routerLinkActive="active">PLANNER</a>
