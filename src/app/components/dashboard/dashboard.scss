@@ -1,3 +1,5 @@
+@use "../../shared/buttons";
+
 .dashboard {
   display: flex;
   gap: 15px;
@@ -19,119 +21,6 @@
   &.initial-animation {
     opacity: 0;
     animation: fade-in 0.3s ease calc(var(--i) * 0.2s + 0.1s) forwards;
-  }
-}
-
-/* ==========================================================================
-   2. BUTTONs
-   ========================================================================== */
-.dashboard-item {
-  will-change: transform, opacity;
-  cursor: pointer;
-  user-select: none;
-
-  transform: translateZ(0);
-
-  display: flex;
-  flex: 1;
-  gap: 4px;
-  align-items: center;
-  justify-content: center;
-
-  border: none;
-  border-radius: 8px;
-
-  font-family: Orbitron, sans-serif;
-  color: var(--btn-text-color);
-
-  backface-visibility: hidden;
-  background-color: var(--btn-bg-color);
-  outline: none;
-  box-shadow:
-    0 6px 0 var(--btn-border-color),
-    0 10px 15px rgb(0 0 0 / 40%),
-    0 0 12px var(--btn-glow-color);
-
-  transition:
-    transform 0.1s ease,
-    box-shadow 0.1s ease,
-    background-color 0.15s ease,
-    color 0.15s ease;
-
-  &.initial-animation {
-    animation: highlight 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)
-      calc(var(--i) * 0.2s + 0.1s) backwards;
-  }
-
-  &.animated {
-    animation: trigger-highlight 0.6s ease 0s forwards !important;
-  }
-
-  .material-symbols-outlined {
-    padding-right: 5px;
-    font-size: 32px;
-  }
-
-  .dashboard-item-text {
-    justify-content: center;
-    font-size: 18px;
-    letter-spacing: 0.5px;
-  }
-
-  .dashboard-counter {
-    padding: 4px;
-    font-size: 20px;
-    text-shadow: 0 0 8px rgb(0 0 0 / 60%);
-  }
-
-  /* ==========================================================================
-   3. INTERACTIVE STATES
-   ========================================================================== */
-  &:hover {
-    transform: translateY(-2px);
-    color: #fff;
-    background-color: var(--btn-hover-bg);
-    box-shadow:
-      0 8px 0 var(--btn-border-color),
-      0 12px 20px rgb(0 0 0 / 50%),
-      0 0 20px var(--btn-glow-hover);
-  }
-
-  &:active {
-    transform: translateY(4px);
-    box-shadow:
-      0 2px 0 var(--btn-border-color),
-      0 4px 8px rgb(0 0 0 / 40%);
-  }
-
-  /* ==========================================================================
-   4. THEMES
-   ========================================================================== */
-  &.toplay {
-    --btn-bg-color: var(--btn-toplay-bg);
-    --btn-hover-bg: var(--btn-toplay-hover-bg);
-    --btn-text-color: var(--btn-toplay-text);
-    --btn-border-color: var(--btn-toplay-border);
-    --btn-glow-color: var(--btn-toplay-glow);
-    --btn-glow-hover: var(--btn-toplay-glow-hover);
-  }
-
-  &.playing {
-    --btn-bg-color: var(--btn-playing-bg);
-    --btn-hover-bg: var(--btn-playing-hover-bg);
-    --btn-text-color: var(--btn-playing-text);
-    --btn-border-color: var(--btn-playing-border);
-    --btn-glow-color: var(--btn-playing-glow);
-    --btn-glow-hover: var(--btn-playing-glow-hover);
-  }
-
-  &.completed {
-    --btn-bg-color: var(--btn-completed-bg);
-    --btn-hover-bg: var(--btn-completed-hover-bg);
-    --btn-text-color: var(--btn-completed-text);
-    --btn-border-color: var(--btn-completed-border);
-    --btn-glow-color: var(--btn-completed-glow);
-    --btn-glow-hover: var(--btn-completed-glow-hover);
   }
 }
 

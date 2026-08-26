@@ -7,7 +7,7 @@
     >
       <button
         type="button"
-        class="dashboard-item toplay"
+        class="button-raised purple"
         [class.initial-animation]="animatedStatus() === null"
         [class.animated]="animatedStatus() === 'TO_PLAY'"
         style="--i: 0"
@@ -28,7 +28,7 @@
     >
       <button
         type="button"
-        class="dashboard-item playing"
+        class="button-raised red"
         [class.initial-animation]="animatedStatus() === null"
         [class.animated]="animatedStatus() === 'PLAYING'"
         style="--i: 1"
@@ -49,7 +49,7 @@
     >
       <button
         type="button"
-        class="dashboard-item completed"
+        class="button-raised green"
         [class.initial-animation]="animatedStatus() === null"
         [class.animated]="animatedStatus() === 'COMPLETED'"
         style="--i: 2"
