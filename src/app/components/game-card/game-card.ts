@@ -42,19 +42,25 @@ export class GameCard implements AfterViewInit, OnDestroy {
     this.initTilt();
   }
 
-  initTilt() {
-    const cardEl =
-      this.tiltCard?.nativeElement || this.hostElement.nativeElement;
+  private getCardElement(): HTMLElement | null {
+    return (
+      this.tiltCard?.nativeElement || this.hostElement?.nativeElement || null
+    );
+  }
 
-    VanillaTilt.init(cardEl, {
-      max: 15,
-      speed: 2000,
-      glare: true,
-      'max-glare': 0.5,
-      gyroscope: false,
-      perspective: 1000,
-      scale: 1.05,
-    });
+  initTilt() {
+    const cardEl = this.getCardElement();
+    if (cardEl) {
+      VanillaTilt.init(cardEl, {
+        max: 15,
+        speed: 2000,
+        glare: true,
+        'max-glare': 0.5,
+        gyroscope: false,
+        perspective: 1000,
+        scale: 1.05,
+      });
+    }
   }
 
   addGameTo(gameStatus: GameStatus) {
@@ -70,18 +76,23 @@ export class GameCard implements AfterViewInit, OnDestroy {
     this.userGameService.incrementGameCount(gameStatus);
   }
 
-  ngOnDestroy() {
-    const cardEl =
-      this.tiltCard?.nativeElement || this.hostElement.nativeElement;
-    if (cardEl && (cardEl as any).vanillaTilt) {
-      (cardEl as any).vanillaTilt.destroy();
-    }
-  }
-
   onDelete() {
     this.isDeleted = true;
     setTimeout(() => {
       this.remove.emit(this.game.id);
     }, 500);
+  }
+
+  ngOnDestroy() {
+    const cardEl = this.getCardElement();
+    if (cardEl && (cardEl as any).vanillaTilt) {
+      const tiltInstance = (cardEl as any).vanillaTilt;
+
+      if (tiltInstance.removeEventListener) {
+        tiltInstance.removeEventListener();
+      }
+
+      delete (cardEl as any).vanillaTilt;
+    }
   }
 }
