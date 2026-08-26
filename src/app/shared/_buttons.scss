@@ -58,7 +58,7 @@
   }
 
   /* ==========================================================================
-   3. INTERACTIVE STATES
+   INTERACTIVE STATES
    ========================================================================== */
   &:hover {
     transform: translateY(-2px);
@@ -78,7 +78,7 @@
   }
 
   /* ==========================================================================
-   4. THEMES
+   THEMES
    ========================================================================== */
   &.purple {
     --btn-bg-color: var(--btn-toplay-bg);
@@ -105,5 +105,45 @@
     --btn-border-color: var(--btn-completed-border);
     --btn-glow-color: var(--btn-completed-glow);
     --btn-glow-hover: var(--btn-completed-glow-hover);
+  }
+}
+
+/* ==========================================================================
+   GOOGLE BUTTON
+   ========================================================================== */
+.google-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+
+  .google-btn {
+    cursor: pointer;
+
+    overflow: hidden;
+
+    border-radius: 6px;
+
+    box-shadow: 0 6px 0 var(--text-main);
+
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      color: #fff;
+      background-color: white;
+      box-shadow:
+        0 8px 0 var(--text-main),
+        0 12px 20px rgb(0 0 0 / 50%),
+        0 0 20px var(--btn-toplay-glow-hover);
+    }
+
+    &:active {
+      transform: translateY(4px);
+      box-shadow:
+        0 2px 0 var(--text-main),
+        0 4px 8px rgb(0 0 0 / 40%);
+    }
   }
 }

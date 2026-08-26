@@ -1,44 +1,35 @@
-/* stylelint-disable-next-line selector-class-pattern */
-.mat-mdc-dialog-container .mdc-dialog__surface {
-  border-radius: 14px !important;
-  background-color: transparent !important;
-}
-
-.material-symbols-outlined {
-  display: inline-block;
-  font-size: 30px;
-  font-variation-settings:
-    "FILL" 0,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 30;
-  transition: font-variation-settings 0.3s ease;
-}
-
 .modal-container {
   overflow: hidden;
 
   box-sizing: border-box;
   width: 350px;
   padding: 10px;
-  border: 5px solid var(--ternary-color);
+  border: 2px solid var(--ternary-color);
   border-radius: 14px;
 
   background-color: var(--bg-modal);
+  box-shadow:
+    0 20px 40px -15px rgb(0 0 0 / 60%),
+    0 0 15px -2px var(--ternary-color);
 
   .modal-header {
     height: 50px;
-    margin: -12px -10px 20px;
+    margin: -10px -10px 20px;
+    border-bottom: 2px solid var(--ternary-color);
+
     background-color: var(--bg-dark-lighter-2);
+    box-shadow: 0 4px 10px rgb(0 0 0 / 25%);
 
     .modal-title {
       margin: 0;
       padding-top: 10px;
 
       font-family: Orbitron, sans-serif;
-      font-size: 2em;
+      font-size: 1.8em;
       font-weight: 700;
+      color: var(--ternary-color);
       text-align: center;
+      text-shadow: 0 2px 8px rgb(0 0 0 / 50%);
     }
   }
 
@@ -53,25 +44,31 @@
     }
   }
 
-  .modal-title {
-    margin-left: 20px;
-  }
-
   .form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
 
     input {
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-    }
-  }
+      padding: 10px 12px;
+      border: 1px solid rgb(255 255 255 / 10%);
+      border-radius: 8px;
 
-  .blur-backdrop {
-    background-color: rgb(0 0 0 / 65%);
-    backdrop-filter: blur(6px);
+      color: var(--text-main-2);
+
+      background-color: var(--bg-dark-lighter-2);
+      box-shadow: inset 0 2px 4px rgb(0 0 0 / 40%);
+
+      transition: all 0.2s ease;
+
+      &:focus {
+        border-color: var(--ternary-color);
+        outline: none;
+        box-shadow:
+          inset 0 2px 4px rgb(0 0 0 / 40%),
+          0 0 8px var(--ternary-color);
+      }
+    }
   }
 
   .divider {
@@ -88,7 +85,14 @@
   mat-dialog-actions {
     padding-top: 10px;
 
-    button {
+    .auth-btn,
+    .auth-cancel-btn {
+      cursor: pointer;
+
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+
       font-size: 18px;
       font-weight: 700;
     }
