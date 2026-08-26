@@ -61,7 +61,7 @@
       animation: move-and-fade 0.4s ease-out;
 
       .game-card-name {
-        padding-top: 10px;
+        padding-top: 0;
         text-overflow: clip;
         overflow-wrap: break-word;
         white-space: normal;
@@ -162,13 +162,15 @@
 
 .game-card-text {
   z-index: 5;
-  transform: translateZ(40px) translateY(0);
+  transform: translateY(0);
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 
+  height: 50px;
   padding: 5px;
+  padding-top: 10px;
 
   transition:
     transform 0.3s ease-out,
@@ -176,9 +178,14 @@
     font-size 0.3s ease-out;
 
   .game-card-name {
-    overflow: hidden;
+    position: relative;
 
-    margin-left: 20px;
+    overflow: hidden;
+    flex: 1;
+
+    min-width: 0;
+    margin: 5px 20px;
+    padding: 0;
 
     font-size: var(--card-name-font);
     color: white;
@@ -187,11 +194,18 @@
   }
 
   .game-card-badge {
+    position: relative;
+    z-index: 10;
+
+    flex-shrink: 0;
+
     margin-right: 20px;
+    margin-left: 10px;
     padding: 4px 8px;
     border-radius: 10px;
 
     font-size: var(--card-badge-size);
+    color: white;
 
     background: rgb(255 255 255 / 20%);
     backdrop-filter: blur(4px);
