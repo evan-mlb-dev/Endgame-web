@@ -23,6 +23,28 @@
     line-height: 1;
     color: #fff;
     letter-spacing: -1px;
+    white-space: nowrap;
+
+    &::after {
+      content: "";
+
+      display: inline-block;
+
+      width: clamp(0.5px, 1.45vw, 8px);
+      height: clamp(0.5px, 1.45vw, 8px);
+      margin-right: 20px;
+      margin-left: 6px;
+      border-radius: 50%;
+
+      vertical-align: baseline;
+
+      background-color: var(--primary-color);
+      box-shadow:
+        0 0 6px var(--primary-color),
+        0 0 12px var(--primary-color);
+
+      animation: pulse 10s ease-in-out infinite alternate;
+    }
   }
 }
 
@@ -52,7 +74,7 @@
 
   overflow: hidden;
 
-  width: 288px;
+  width: 94%;
   height: 2px;
   border-radius: 2px;
 
