@@ -1,0 +1,110 @@
+/* stylelint-disable-next-line selector-class-pattern */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 14px !important;
+  background-color: transparent !important;
+}
+
+.material-symbols-outlined {
+  display: inline-block;
+  font-size: 30px;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 30;
+  transition: font-variation-settings 0.3s ease;
+}
+
+.modal-container {
+  overflow: hidden;
+
+  box-sizing: border-box;
+  width: 350px;
+  padding: 10px;
+  border: 5px solid var(--secondary-color);
+  border-radius: 14px;
+
+  background-color: var(--bg-modal);
+
+  .error-message-container {
+    .error-icon {
+      margin-right: 10px;
+      color: white;
+    }
+
+    .error-text {
+      color: var(--primary-color);
+    }
+  }
+
+  .modal-title {
+    margin-left: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+
+    input {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+  }
+
+  .blur-backdrop {
+    background-color: rgb(0 0 0 / 65%);
+    backdrop-filter: blur(6px);
+  }
+
+  .divider {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+    color: var(--text-main);
+  }
+
+  .google-btn-wrapper {
+    margin-bottom: 5px;
+  }
+
+  mat-dialog-actions {
+    padding-top: 10px;
+
+    button {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .auth-btn {
+      cursor: pointer;
+
+      margin-left: 5px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+
+      color: var(--text-main-2);
+
+      background: var(--secondary-color);
+    }
+
+    .auth-cancel-btn {
+      cursor: pointer;
+
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+
+      color: var(--text-main-2);
+
+      background: var(--primary-color);
+    }
+
+    input.ng-invalid.ng-touched {
+      border-color: #9b1c1c;
+      background-color: #fff6f6;
+    }
+  }
+}
