@@ -8,6 +8,7 @@
       <button
         type="button"
         class="button-raised purple"
+        [class.active]="status() === 'TO_PLAY'"
         [class.initial-animation]="animatedStatus() === null"
         [class.animated]="animatedStatus() === 'TO_PLAY'"
         style="--i: 0"
@@ -29,6 +30,7 @@
       <button
         type="button"
         class="button-raised red"
+        [class.active]="status() === 'PLAYING'"
         [class.initial-animation]="animatedStatus() === null"
         [class.animated]="animatedStatus() === 'PLAYING'"
         style="--i: 1"
@@ -50,6 +52,7 @@
       <button
         type="button"
         class="button-raised green"
+        [class.active]="status() === 'COMPLETED'"
         [class.initial-animation]="animatedStatus() === null"
         [class.animated]="animatedStatus() === 'COMPLETED'"
         style="--i: 2"

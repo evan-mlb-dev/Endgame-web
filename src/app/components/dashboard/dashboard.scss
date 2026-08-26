@@ -8,25 +8,33 @@
   height: 50px;
   padding: 10px 10px 20px;
   border-radius: 10px;
-}
 
-/* ==========================================================================
-   1. CONTAINER
-   ========================================================================== */
-.dashboard-item-container {
-  display: flex;
-  width: 100%;
-  opacity: 1;
+  .dashboard-item-container {
+    display: flex;
+    width: 100%;
+    opacity: 1;
 
-  &.initial-animation {
-    opacity: 0;
-    animation: fade-in 0.3s ease calc(var(--i) * 0.2s + 0.1s) forwards;
+    &.initial-animation {
+      opacity: 0;
+      animation: fade-in 0.3s ease calc(var(--i) * 0.2s + 0.1s) forwards;
+    }
+
+    .active {
+      transform: translateY(-2px);
+      color: #fff;
+      background-color: var(--btn-hover-bg);
+      box-shadow:
+        0 8px 0 var(--btn-border-color),
+        0 12px 20px rgb(0 0 0 / 50%),
+        0 0 20px var(--btn-glow-hover);
+    }
   }
 }
 
 /* ==========================================================================
-   5. KEYFRAMES
+   KEYFRAMES
    ========================================================================== */
+
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -38,27 +46,6 @@
 }
 
 @keyframes highlight {
-  0%,
-  50% {
-    color: #fff;
-    background-color: var(--btn-hover-bg);
-    box-shadow:
-      0 8px 0 var(--btn-border-color),
-      0 12px 20px rgb(0 0 0 / 50%),
-      0 0 20px var(--btn-glow-hover);
-  }
-
-  100% {
-    color: var(--btn-text-color);
-    background-color: var(--btn-bg-color);
-    box-shadow:
-      0 6px 0 var(--btn-border-color),
-      0 10px 15px rgb(0 0 0 / 40%),
-      0 0 12px var(--btn-glow-color);
-  }
-}
-
-@keyframes trigger-highlight {
   0%,
   50% {
     color: #fff;

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GameStatusCounts } from '@app/models/game-status.enum';
 import { AuthService } from '@app/services/authService';
 import { UserGameService } from '@app/services/userGameService';
-import { Subscription } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +20,9 @@ export class Dashboard implements OnInit, OnDestroy {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  //route
+  private route = inject(ActivatedRoute);
+
   // vars
   gameCounts: GameStatusCounts | null = null;
   animatedStatus = signal<string | null>(null);
@@ -27,9 +31,13 @@ export class Dashboard implements OnInit, OnDestroy {
   private subCounts?: Subscription;
   private subAnimation?: Subscription;
 
+  public status = toSignal(
+    this.route.queryParamMap.pipe(map((params) => params.get('status'))),
+    { requireSync: true },
+  );
+
   navigateToStatus(status: string): void {
     this.triggerAnimation(status);
-
     setTimeout(() => {
       this.router.navigate(['/backlog'], { queryParams: { status } });
     }, 100);
