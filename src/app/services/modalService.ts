@@ -13,6 +13,7 @@ export class ModalService {
     this.dialog.open(LoginModal, {
       panelClass: 'login-modal',
       backdropClass: 'blur-backdrop',
+      position: { top: '15vh' },
     });
   }
 
@@ -20,6 +21,7 @@ export class ModalService {
     this.dialog.open(SigninModal, {
       panelClass: 'signin-modal',
       backdropClass: 'blur-backdrop',
+      position: { top: '15vh' },
     });
   }
 }
