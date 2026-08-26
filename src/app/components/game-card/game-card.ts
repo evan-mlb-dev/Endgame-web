@@ -28,12 +28,14 @@ export class GameCard implements AfterViewInit, OnDestroy {
   @Output() remove = new EventEmitter<number>();
   @ViewChild('tiltCard') tiltCard?: ElementRef;
 
-  // Service
+  // Services
   public userGameService = inject(UserGameService);
   public modalService = inject(ModalService);
   private authService = inject(AuthService);
+
   // Vars
   public isDeleted = false;
+  public isLoading = false;
   public GameStatus = GameStatus;
 
   constructor(private hostElement: ElementRef) {}
@@ -64,16 +66,27 @@ export class GameCard implements AfterViewInit, OnDestroy {
   }
 
   addGameTo(gameStatus: GameStatus) {
+    if (this.isLoading) return;
+
     if (!this.authService.isSessionValid()) {
       this.modalService.openSignInModal();
-    } else if (this.game.id) {
-      this.userGameService.addUserGame(this.game.id, gameStatus).subscribe({
-        next: (res) => console.log('Success !', res),
-        error: (err) => console.error('Error :', err),
-      });
-      this.onDelete();
+      return;
     }
-    this.userGameService.incrementGameCount(gameStatus);
+
+    if (this.game.id) {
+      this.isLoading = true;
+      this.userGameService.addUserGame(this.game.id, gameStatus).subscribe({
+        next: (res) => {
+          console.log('Success !', res);
+          this.userGameService.incrementGameCount(gameStatus);
+          this.onDelete();
+        },
+        error: (err) => {
+          console.error('Error :', err);
+          this.isLoading = false;
+        },
+      });
+    }
   }
 
   onDelete() {
