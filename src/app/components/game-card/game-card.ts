@@ -25,7 +25,10 @@ import { Game } from '../../models/game';
 })
 export class GameCard implements AfterViewInit, OnDestroy {
   @Input({ required: true }) game!: Game;
+  @Input({ required: true }) size!: string;
+
   @Output() remove = new EventEmitter<number>();
+
   @ViewChild('tiltCard') tiltCard?: ElementRef;
 
   // Services

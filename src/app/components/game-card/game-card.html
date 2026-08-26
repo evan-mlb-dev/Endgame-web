@@ -1,9 +1,16 @@
 @if (game.backgroundImage) {
-  <div #tiltCard class="game-card" [class.animate-disappear]="isDeleted">
+  <div
+    #tiltCard
+    class="game-card"
+    [class.size-small]="size === 'small'"
+    [class.size-large]="size === 'large'"
+    [class.animate-disappear]="isDeleted"
+  >
     <img
       class="game-card-image"
       [src]="game.backgroundImage"
       [alt]="game.name"
+      draggable="false"
     />
     <div class="game-card-bg"></div>
     <div class="game-card-blob"></div>

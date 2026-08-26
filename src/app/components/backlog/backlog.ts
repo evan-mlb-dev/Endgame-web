@@ -7,7 +7,7 @@ import { AuthService } from '@app/services/authService';
 import { GameService } from '@app/services/gameService';
 import { ModalService } from '@app/services/modalService';
 import { UserGameService } from '@app/services/userGameService';
-import { Subscription } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { Ended } from '../ended/ended';
 import { CardSize } from '../game-card/cardsize';
 import { Playing } from '../playing/playing';
@@ -60,36 +60,45 @@ export class Backlog {
             const gameIds = this.userGameService.getUserGamesIds(userGames);
 
             if (gameIds.length > 0) {
-              this.gameService.getGamesByIds(gameIds).subscribe((gamesData) => {
-                // 1. Global update
-                this.games.set(gamesData);
-                // 2. Filter by games status
-                if (userGames) {
-                  // Extract Game Ids
-                  const toPlayIds = new Set(
-                    userGames.TO_PLAY?.map((ug) => ug.gameId) ?? [],
-                  );
-                  const playingIds = new Set(
-                    userGames.PLAYING?.map((ug) => ug.gameId) ?? [],
-                  );
-                  const endedIds = new Set([
-                    ...(userGames.COMPLETED?.map((ug) => ug.gameId) ?? []),
-                    ...(userGames.DROPPED?.map((ug) => ug.gameId) ?? []),
-                    ...(userGames.ON_HOLD?.map((ug) => ug.gameId) ?? []),
-                  ]);
+              this.gameService
+                .getGamesByIds(gameIds)
+                .pipe(
+                  map((rawGames) =>
+                    rawGames.map((gameData) =>
+                      Object.assign(new Game(), gameData),
+                    ),
+                  ),
+                )
+                .subscribe((gamesData) => {
+                  // 1. Global update
+                  this.games.set(gamesData);
+                  // 2. Filter by games status
+                  if (userGames) {
+                    // Extract Game Ids
+                    const toPlayIds = new Set(
+                      userGames.TO_PLAY?.map((ug) => ug.gameId) ?? [],
+                    );
+                    const playingIds = new Set(
+                      userGames.PLAYING?.map((ug) => ug.gameId) ?? [],
+                    );
+                    const endedIds = new Set([
+                      ...(userGames.COMPLETED?.map((ug) => ug.gameId) ?? []),
+                      ...(userGames.DROPPED?.map((ug) => ug.gameId) ?? []),
+                      ...(userGames.ON_HOLD?.map((ug) => ug.gameId) ?? []),
+                    ]);
 
-                  // set Signals
-                  this.gamesToPlay.set(
-                    gamesData.filter((game) => toPlayIds.has(game.id)),
-                  );
-                  this.gamesPlaying.set(
-                    gamesData.filter((game) => playingIds.has(game.id)),
-                  );
-                  this.gamesEnded.set(
-                    gamesData.filter((game) => endedIds.has(game.id)),
-                  );
-                }
-              });
+                    // set Signals
+                    this.gamesToPlay.set(
+                      gamesData.filter((game) => toPlayIds.has(game.id)),
+                    );
+                    this.gamesPlaying.set(
+                      gamesData.filter((game) => playingIds.has(game.id)),
+                    );
+                    this.gamesEnded.set(
+                      gamesData.filter((game) => endedIds.has(game.id)),
+                    );
+                  }
+                });
             }
           }
         },

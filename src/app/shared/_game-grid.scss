@@ -1,0 +1,26 @@
+.game-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+
+  padding: 10px 20px;
+
+  &.size-small {
+    gap: 20px;
+
+    app-game-card {
+      --card-width: 250px;
+    }
+  }
+
+  &.size-large {
+    app-game-card {
+      --card-width: 400px;
+    }
+  }
+
+  app-game-card {
+    flex: 0 1 var(--card-width);
+  }
+}

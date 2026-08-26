@@ -11,6 +11,7 @@
       [class.animate-slide]="idBeingDeleted() === game.id"
       [style.--i]="i"
       [game]="game"
+      [size]="cardSize()"
       (remove)="deleteGame($event)"
     >
     </app-game-card>

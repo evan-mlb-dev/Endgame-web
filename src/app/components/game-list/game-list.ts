@@ -39,17 +39,7 @@ export class GameList implements OnInit {
       this.gameService.get50Games().subscribe({
         next: (data) => {
           const mapped = data
-            .map(
-              (gameData) =>
-                new Game(
-                  gameData.id,
-                  gameData.name,
-                  gameData.released,
-                  gameData.backgroundImage,
-                  gameData.rating,
-                  gameData.metacritic,
-                ),
-            )
+            .map((gameData) => new Game(gameData))
             .sort((a, b) => b.rating - a.rating);
 
           this.games.set(mapped);
@@ -61,17 +51,7 @@ export class GameList implements OnInit {
     } else {
       this.gameService.searchGames(searchTerm).subscribe({
         next: (data) => {
-          const mapped = data.map(
-            (gameData) =>
-              new Game(
-                gameData.id,
-                gameData.name,
-                gameData.released,
-                gameData.backgroundImage,
-                gameData.rating,
-                gameData.metacritic,
-              ),
-          );
+          const mapped = data.map((gameData) => new Game(gameData));
 
           this.games.set(mapped);
         },
