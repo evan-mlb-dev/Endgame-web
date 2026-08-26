@@ -17,6 +17,7 @@
   /* Bg colors */
   --bg-dark: #0b0e14;
   --bg-dark-lighter: #12161f;
+  --bg-dark-lighter-2: #2d3036;
   --bg-modal: #1a1d24;
   --card-bg: #34344a;
 
@@ -206,6 +207,11 @@ a {
   border-radius: 14px !important;
   background-color: transparent !important;
   box-shadow: none !important; /* Optionnel : si tu veux enlever l'ombre par défaut */
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  background-color: rgb(0 0 0 / 40%) !important;
+  backdrop-filter: blur(6px) !important;
 }
 
 /* ==========================================================================

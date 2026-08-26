@@ -26,6 +26,21 @@
 
   background-color: var(--bg-modal);
 
+  .modal-header {
+    height: 50px;
+    margin: -12px -10px 15px;
+    background-color: var(--bg-dark-lighter-2);
+
+    .modal-title {
+      margin: 0;
+      padding-top: 10px;
+
+      font-size: 2em;
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+
   .error-message-container {
     .error-icon {
       margin-right: 10px;
