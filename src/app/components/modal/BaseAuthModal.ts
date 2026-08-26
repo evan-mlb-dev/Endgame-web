@@ -19,6 +19,7 @@ export abstract class BaseAuthModal<T> implements AfterViewInit {
   protected authService = inject(AuthService);
   protected dialogRef = inject(MatDialogRef<T>);
   protected ngZone = inject(NgZone);
+  private static isGoogleInitialized = false;
 
   public errorMessage: string | null = null;
   protected readonly googleClientId = environment['google.client.id'];
@@ -33,10 +34,13 @@ export abstract class BaseAuthModal<T> implements AfterViewInit {
 
   protected initGoogleButton(): void {
     if (typeof google !== 'undefined' && google.accounts) {
-      google.accounts.id.initialize({
-        client_id: this.googleClientId,
-        callback: (response: any) => this.handleGoogleCredential(response),
-      });
+      if (!BaseAuthModal.isGoogleInitialized) {
+        google.accounts.id.initialize({
+          client_id: this.googleClientId,
+          callback: (response: any) => this.handleGoogleCredential(response),
+        });
+        BaseAuthModal.isGoogleInitialized = true;
+      }
 
       const target = document.getElementById('google-btn');
       if (target) {
