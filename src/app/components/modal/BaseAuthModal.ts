@@ -49,6 +49,16 @@ export abstract class BaseAuthModal<T> implements AfterViewInit {
     }
   }
 
+  public triggerGoogleLogin(): void {
+    if (typeof google !== 'undefined' && google.accounts) {
+      google.accounts.id.initialize({
+        client_id: this.googleClientId,
+        callback: (response: any) => this.handleGoogleCredential(response),
+      });
+      google.accounts.id.prompt();
+    }
+  }
+
   protected handleGoogleCredential(googleResponse: any): void {
     this.ngZone.run(() => {
       this.authService.loginWithGoogle(googleResponse.credential).subscribe({
