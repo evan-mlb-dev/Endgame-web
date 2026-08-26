@@ -1,6 +1,7 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { Game } from '@app/models/game';
 import { GameStatus } from '@app/models/game-status.enum';
+import { Session } from '@app/models/session';
 import { UserGame } from '@app/models/userGame';
 import { AuthService } from '@app/services/authService';
 import { GameService } from '@app/services/gameService';
@@ -26,6 +27,8 @@ export class Backlog {
   private modalService = inject(ModalService);
   //vars
   userGames: Partial<Record<GameStatus, UserGame[]>> | null = null;
+  public currentSession: Session | null = null;
+
   // Déclaration en Signal
   games = signal<Game[]>([]);
   gamesToPlay = signal<Game[]>([]);
@@ -35,8 +38,17 @@ export class Backlog {
   cardSizeBacklog = signal<CardSize>('small');
   //subs
   private subUserGames?: Subscription;
+  private sessionSubscription!: Subscription;
 
   ngOnInit(): void {
+    this.sessionSubscription = this.authService.userSession$.subscribe({
+      next: (session: Session | null) => {
+        if (session) {
+          this.currentSession = session;
+        }
+      },
+      error: (err) => console.error('Error :', err),
+    });
     if (this.authService.isSessionValid()) {
       // UserGames
       this.userGameService.refreshUserGames();

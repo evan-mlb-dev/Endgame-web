@@ -1,21 +1,27 @@
 <div class="backlog-container">
-  @if (status() === "TO_PLAY") {
-    <app-to-play
-      [games]="gamesToPlay()"
-      [uGames]="userGames"
-      [cardSizeBacklog]="cardSizeBacklog()"
-    ></app-to-play>
-  } @else if (status() === "COMPLETED") {
-    <app-ended
-      [games]="gamesEnded()"
-      [uGames]="userGames"
-      [cardSizeBacklog]="cardSizeBacklog()"
-    ></app-ended>
+  @if (currentSession; as session) {
+    @if (status() === "TO_PLAY") {
+      <app-to-play
+        [games]="gamesToPlay()"
+        [uGames]="userGames"
+        [cardSizeBacklog]="cardSizeBacklog()"
+      ></app-to-play>
+    } @else if (status() === "COMPLETED") {
+      <app-ended
+        [games]="gamesEnded()"
+        [uGames]="userGames"
+        [cardSizeBacklog]="cardSizeBacklog()"
+      ></app-ended>
+    } @else {
+      <app-playing
+        [games]="gamesPlaying()"
+        [uGames]="userGames"
+        [cardSizeBacklog]="cardSizeBacklog()"
+      ></app-playing>
+    }
   } @else {
-    <app-playing
-      [games]="gamesPlaying()"
-      [uGames]="userGames"
-      [cardSizeBacklog]="cardSizeBacklog()"
-    ></app-playing>
+    <div class="anonymous-msg">
+      <span>Please login to consult your backlog.</span>
+    </div>
   }
 </div>
