@@ -30,7 +30,7 @@ export class UserGameService {
   public userGames$: Observable<Partial<Record<GameStatus, UserGame[]>>> =
     this.userGamesSubject.asObservable();
 
-  public incrementGameCount(
+  public updateGameCount(
     status: keyof GameStatusCounts,
     amount: number = 1,
   ): void {

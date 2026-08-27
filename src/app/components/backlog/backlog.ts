@@ -1,4 +1,12 @@
-import { Component, inject, input, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { Game } from '@app/models/game';
 import { GameStatus } from '@app/models/game-status.enum';
 import { Session } from '@app/models/session';
@@ -15,30 +23,53 @@ import { ToPlay } from '../to-play/to-play';
 
 @Component({
   selector: 'app-backlog',
+  standalone: true,
   imports: [Playing, ToPlay, Ended],
   templateUrl: './backlog.html',
   styleUrl: './backlog.scss',
 })
-export class Backlog {
-  // services
+export class Backlog implements OnInit, OnDestroy {
+  // Services
   private userGameService = inject(UserGameService);
   private gameService = inject(GameService);
   private authService = inject(AuthService);
   private modalService = inject(ModalService);
-  //vars
-  userGames: Partial<Record<GameStatus, UserGame[]>> | null = null;
+  // Session
   public currentSession: Session | null = null;
 
-  // Déclaration en Signal
-  games = signal<Game[]>([]);
-  gamesToPlay = signal<Game[]>([]);
-  gamesPlaying = signal<Game[]>([]);
-  gamesEnded = signal<Game[]>([]);
-  status = input<string>();
-  cardSizeBacklog = signal<CardSize>('small');
-  //subs
+  // Subscriptions
   private subUserGames?: Subscription;
   private sessionSubscription!: Subscription;
+
+  // Signal
+  status = input<string>();
+  cardSizeBacklog = signal<CardSize>('small');
+  games = signal<Game[]>([]);
+  userGames = signal<Partial<Record<GameStatus, UserGame[]>> | null>(null);
+  // Signal computing
+  gamesToPlay = computed(() => {
+    const ids = new Set(
+      this.userGames()?.TO_PLAY?.map((ug) => ug.gameId) ?? [],
+    );
+    return this.games().filter((game) => ids.has(game.id));
+  });
+
+  gamesPlaying = computed(() => {
+    const ids = new Set(
+      this.userGames()?.PLAYING?.map((ug) => ug.gameId) ?? [],
+    );
+    return this.games().filter((game) => ids.has(game.id));
+  });
+
+  gamesEnded = computed(() => {
+    const userGamesData = this.userGames();
+    const ids = new Set([
+      ...(userGamesData?.COMPLETED?.map((ug) => ug.gameId) ?? []),
+      ...(userGamesData?.DROPPED?.map((ug) => ug.gameId) ?? []),
+      ...(userGamesData?.ON_HOLD?.map((ug) => ug.gameId) ?? []),
+    ]);
+    return this.games().filter((game) => ids.has(game.id));
+  });
 
   ngOnInit(): void {
     this.sessionSubscription = this.authService.userSession$.subscribe({
@@ -49,12 +80,15 @@ export class Backlog {
       },
       error: (err) => console.error('Error :', err),
     });
+
     if (this.authService.isSessionValid()) {
-      // UserGames
+      // Chargement initial des jeux utilisateur
       this.userGameService.refreshUserGames();
+
       this.subUserGames = this.userGameService.userGames$.subscribe(
         (userGames) => {
-          this.userGames = userGames;
+          // Met à jour le signal réactif
+          this.userGames.set(userGames);
 
           if (userGames) {
             const gameIds = this.userGameService.getUserGamesIds(userGames);
@@ -70,35 +104,10 @@ export class Backlog {
                   ),
                 )
                 .subscribe((gamesData) => {
-                  // 1. Global update
                   this.games.set(gamesData);
-                  // 2. Filter by games status
-                  if (userGames) {
-                    // Extract Game Ids
-                    const toPlayIds = new Set(
-                      userGames.TO_PLAY?.map((ug) => ug.gameId) ?? [],
-                    );
-                    const playingIds = new Set(
-                      userGames.PLAYING?.map((ug) => ug.gameId) ?? [],
-                    );
-                    const endedIds = new Set([
-                      ...(userGames.COMPLETED?.map((ug) => ug.gameId) ?? []),
-                      ...(userGames.DROPPED?.map((ug) => ug.gameId) ?? []),
-                      ...(userGames.ON_HOLD?.map((ug) => ug.gameId) ?? []),
-                    ]);
-
-                    // set Signals
-                    this.gamesToPlay.set(
-                      gamesData.filter((game) => toPlayIds.has(game.id)),
-                    );
-                    this.gamesPlaying.set(
-                      gamesData.filter((game) => playingIds.has(game.id)),
-                    );
-                    this.gamesEnded.set(
-                      gamesData.filter((game) => endedIds.has(game.id)),
-                    );
-                  }
                 });
+            } else {
+              this.games.set([]);
             }
           }
         },
@@ -107,7 +116,9 @@ export class Backlog {
       this.modalService.openSignInModal();
     }
   }
+
   ngOnDestroy(): void {
     this.subUserGames?.unsubscribe();
+    this.sessionSubscription?.unsubscribe();
   }
 }

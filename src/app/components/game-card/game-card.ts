@@ -9,10 +9,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
 import { GameStatus } from '@app/models/game-status.enum';
 import { AuthService } from '@app/services/authService';
 import { ModalService } from '@app/services/modalService';
 import { UserGameService } from '@app/services/userGameService';
+import { map } from 'rxjs';
 import VanillaTilt from 'vanilla-tilt';
 import { Game } from '../../models/game';
 
@@ -35,6 +38,15 @@ export class GameCard implements AfterViewInit, OnDestroy {
   public userGameService = inject(UserGameService);
   public modalService = inject(ModalService);
   private authService = inject(AuthService);
+
+  // Route
+  private route = inject(ActivatedRoute);
+
+  // Signal
+  public status = toSignal(
+    this.route.queryParamMap.pipe(map((params) => params.get('status'))),
+    { initialValue: null },
+  );
 
   // Vars
   public isDeleted = false;
@@ -81,7 +93,18 @@ export class GameCard implements AfterViewInit, OnDestroy {
       this.userGameService.addUserGame(this.game.id, gameStatus).subscribe({
         next: (res) => {
           console.log('Success !', res);
-          this.userGameService.incrementGameCount(gameStatus);
+
+          this.userGameService.updateGameCount(gameStatus, 1);
+          const currentUrlStatus = this.status();
+          if (currentUrlStatus) {
+            this.userGameService.updateGameCount(
+              currentUrlStatus as GameStatus,
+              -1,
+            );
+          }
+
+          this.userGameService.refreshUserGames();
+
           this.onDelete();
         },
         error: (err) => {
