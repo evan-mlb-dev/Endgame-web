@@ -82,12 +82,10 @@ export class Backlog implements OnInit, OnDestroy {
     });
 
     if (this.authService.isSessionValid()) {
-      // Chargement initial des jeux utilisateur
       this.userGameService.refreshUserGames();
 
       this.subUserGames = this.userGameService.userGames$.subscribe(
         (userGames) => {
-          // Met à jour le signal réactif
           this.userGames.set(userGames);
 
           if (userGames) {
